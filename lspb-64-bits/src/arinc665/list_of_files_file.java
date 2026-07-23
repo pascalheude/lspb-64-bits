@@ -51,9 +51,11 @@ public class list_of_files_file {
                               header_file a_header_file,
                               list_of_loads_file a_list_of_loads_file,
                               data_file a_data_file,
+                              support_file a_support_file,
                               batch_file a_batch_file,
                               char a_load_integrity_check) {
         int i;
+        int file_index;
 
         // Build the name of list of loads file using the basename and the extension
         pName = "FILES." + kFile_extension;
@@ -101,8 +103,13 @@ public class list_of_files_file {
         aLength++;
         // Set the Pointer to File List field
         aPointer_to_File_List = aLength;
-        // Set the Number Of Media Set Files field
-        aNumber_of_media_set_files = (char) (1 + 1 + a_data_file.aName.length + 1);
+        // Set the Number Of Media Set Files field (including support files if any)
+        aNumber_of_media_set_files = (char) (1 + 1 + 1 + a_data_file.aName.length);
+        if (a_support_file != null) {
+        	aNumber_of_media_set_files += (char)a_support_file.aName.length;
+        }
+        else {
+        }
         // Increase the length (size of Number Of Media Set Files fields)
         aLength++;
         aFile_pointer = new char[aNumber_of_media_set_files];
@@ -113,6 +120,8 @@ public class list_of_files_file {
         aFile_CRC = new int[aNumber_of_media_set_files];
 
         // Header file
+        // First file (index = 0)
+        file_index = 0;
         // Set the File Name Length field
         aFN_length[0] = (char) a_header_file.aName.length();
         // Increase the length (size of File Name Length field)
@@ -160,6 +169,8 @@ public class list_of_files_file {
         aLength++;
 
         // LOADS.LUM file
+        // Second file (index = 1)
+        file_index = 1;
         // Set the File Name Length field
         aFN_length[1] = (char) a_list_of_loads_file.aName.length();
         // Increase the length (size of File Name Length field)
@@ -207,6 +218,8 @@ public class list_of_files_file {
         aLength++;
 
         // Batch file (see ARINC665-2 §2.3.1)
+        // Third file (index = 2)
+        file_index = 2;
         // Set the File Name Length field
         aFN_length[2] = (char) a_batch_file.aName.length();
         // Increase the length (size of File Name Length field)
@@ -255,6 +268,8 @@ public class list_of_files_file {
 
         // Data files
         for(i=0;i < a_data_file.aName.length;i++) {
+            // Next file (index = 3, ...)
+        	file_index++;
             // Set the File Name Length field
             aFN_length[i + 3] = (char) a_data_file.aName[i].length();
             // Increase the length (size of File Name Length field)
@@ -307,6 +322,68 @@ public class list_of_files_file {
             // Increase the length (size of File Pointer field)
             aLength++;
         }
+
+        // Support files
+        if (a_support_file != null) {
+            for(i=0;i < a_support_file.aName.length;i++) {
+                // Next file
+            	file_index++;
+                // Set the File Name Length field
+                aFN_length[i + file_index] = (char) a_support_file.aName[i].length();
+                // Increase the length (size of File Name Length field)
+                aLength++;
+                // Set the File Name field
+                aFile_name[i + file_index] = new String(a_support_file.aName[i]);
+                // Increase the length (size of File Name field)
+                aLength += (1 + a_support_file.aName[i].length()) / 2;
+                // Set the File Pathname Length field
+                aFP_length[i + file_index] = (char) (a_sub_directory.length() + 2);
+                // Increase the length (size of File Pathname Length field)
+                aLength++;
+                // Set the File Pathname field
+                aFile_pathname[i + file_index] = new String("\\" + a_sub_directory + "\\");
+                // Increase the length (size of File Pathname field)
+                aLength += (1 + a_sub_directory.length() + 2) / 2;
+                // Set the Member Sequence Number field
+                //aMember_sequence_number = 1;
+                // Increase the length (size of Member Sequence Number field)
+                aLength++;
+                // Set the File CRC field
+                aFile_CRC[i + file_index] = a_support_file.aCRC16[i];
+                // Increase the length (size of File CRC field)
+                aLength++;
+                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                	// Increase the length (size of File Check Value Length field)
+                	aLength++;
+                }
+                else {
+                }
+                if (i == (a_support_file.aName.length - 1)) {
+                    // Set the File Pointer field
+                    aFile_pointer[i + file_index] = 0;
+                }
+                else {
+                    // Set the File Pointer field
+                    aFile_pointer[i + file_index] = (char) (1 +
+                                                   1 +
+                                                   ((1 + a_support_file.aName[i].length()) / 2) +
+                                                   1 +
+                                                   ((1 + a_sub_directory.length() + 2) / 2) +
+                                                   1 +
+                                                   1);
+                    if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                    	aFile_pointer[i + file_index]++;
+                    }
+                    else {
+                    }
+                }
+                // Increase the length (size of File Pointer field)
+                aLength++;
+            }
+        }
+        else {
+        }
+        
         // Add the FILES.LUM File Check Value fields if requested
         if (a_norm_version == ARINC_norm_version.ARINC665_3) {
             // Set the Pointer to FILES.LUM File Check Value field
@@ -353,8 +430,10 @@ public class list_of_files_file {
                               header_file a_header_file,
                               list_of_loads_file a_list_of_loads_file,
                               data_file a_data_file,
+                              support_file a_support_file,
                               char a_load_integrity_check) {
         int i;
+        int file_index;
 
         // Build the name of list of loads file using the basename and the extension
         pName = "FILES." + kFile_extension;
@@ -402,8 +481,13 @@ public class list_of_files_file {
         aLength++;
         // Set the Pointer to File List field
         aPointer_to_File_List = aLength;
-        // Set the Number Of Media Set Files field
+        // Set the Number Of Media Set Files field (including support files if any)
         aNumber_of_media_set_files = (char) (1 + 1 + a_data_file.aName.length);
+        if (a_support_file != null) {
+        	aNumber_of_media_set_files += (char)a_support_file.aName.length;
+        }
+        else {
+        }
         // Increase the length (size of Number Of Media Set Files fields)
         aLength++;
         aFile_pointer = new char[aNumber_of_media_set_files];
@@ -414,6 +498,8 @@ public class list_of_files_file {
         aFile_CRC = new int[aNumber_of_media_set_files];
 
         // Header file
+        // First file (index = 0)
+        file_index = 0;
         // Set the File Name Length field
         aFN_length[0] = (char) a_header_file.aName.length();
         // Increase the length (size of File Name Length field)
@@ -461,6 +547,8 @@ public class list_of_files_file {
         aLength++;
 
         // LOADS.LUM file
+        // Second file (index = 1)
+        file_index = 1;
         // Set the File Name Length field
         aFN_length[1] = (char) a_list_of_loads_file.aName.length();
         // Increase the length (size of File Name Length field)
@@ -509,6 +597,8 @@ public class list_of_files_file {
 
         // Data files
         for(i=0;i < a_data_file.aName.length;i++) {
+            // Next file (index = 2, ...)
+        	file_index++;
             // Set the File Name Length field
             aFN_length[i + 2] = (char) a_data_file.aName[i].length();
             // Increase the length (size of File Name Length field)
@@ -561,6 +651,68 @@ public class list_of_files_file {
             // Increase the length (size of File Pointer field)
             aLength++;
         }
+
+        // Support files
+        if (a_support_file != null) {
+            for(i=0;i < a_support_file.aName.length;i++) {
+                // Next file
+            	file_index++;
+                // Set the File Name Length field
+                aFN_length[i + file_index] = (char) a_support_file.aName[i].length();
+                // Increase the length (size of File Name Length field)
+                aLength++;
+                // Set the File Name field
+                aFile_name[i + file_index] = new String(a_support_file.aName[i]);
+                // Increase the length (size of File Name field)
+                aLength += (1 + a_support_file.aName[i].length()) / 2;
+                // Set the File Pathname Length field
+                aFP_length[i + file_index] = (char) (a_sub_directory.length() + 2);
+                // Increase the length (size of File Pathname Length field)
+                aLength++;
+                // Set the File Pathname field
+                aFile_pathname[i + file_index] = new String("\\" + a_sub_directory + "\\");
+                // Increase the length (size of File Pathname field)
+                aLength += (1 + a_sub_directory.length() + 2) / 2;
+                // Set the Member Sequence Number field
+                //aMember_sequence_number = 1;
+                // Increase the length (size of Member Sequence Number field)
+                aLength++;
+                // Set the File CRC field
+                aFile_CRC[i + file_index] = a_support_file.aCRC16[i];
+                // Increase the length (size of File CRC field)
+                aLength++;
+                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                	// Increase the length (size of File Check Value Length field)
+                	aLength++;
+                }
+                else {
+                }
+                if (i == (a_support_file.aName.length - 1)) {
+                    // Set the File Pointer field
+                    aFile_pointer[i + file_index] = 0;
+                }
+                else {
+                    // Set the File Pointer field
+                    aFile_pointer[i + file_index] = (char) (1 +
+                                                   1 +
+                                                   ((1 + a_support_file.aName[i].length()) / 2) +
+                                                   1 +
+                                                   ((1 + a_sub_directory.length() + 2) / 2) +
+                                                   1 +
+                                                   1);
+                    if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                    	aFile_pointer[i + file_index]++;
+                    }
+                    else {
+                    }
+                }
+                // Increase the length (size of File Pointer field)
+                aLength++;
+            }
+        }
+        else {
+        }
+        
         // Add the FILES.LUM File Check Value fields if requested
         if (a_norm_version == ARINC_norm_version.ARINC665_3) {
             // Set the Pointer to FILES.LUM File Check Value field

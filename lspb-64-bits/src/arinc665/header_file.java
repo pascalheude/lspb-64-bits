@@ -390,10 +390,11 @@ public class header_file {
             else {
             }
         }
-        // Write the Number of Support Files field
-        size += file.WriteChar(lOut_file, aNumber_of_SF);
         // Write all the fields for support files if requested
         if (aSupport_file != null) {
+            // Write the Number of Support Files field
+            size += file.WriteChar(lOut_file, aNumber_of_SF);
+            // Write all the fields for support files
             for(i=1;i <= aSupport_file.aName.length;i++) {
                 size += file.WriteChar(lOut_file, aSupport_file.aPointer[i - 1]);
                 size += file.WriteChar(lOut_file, aSupport_file.aName_length[i - 1]);
@@ -429,10 +430,10 @@ public class header_file {
         }
         // Write Load Check Value fields if requested
         if (a_norm_version == ARINC_norm_version.ARINC665_3) {
-            size += file.WriteChar(lOut_file, (char) 0);
+        	// Write the Load Check Value length field
+            size += file.WriteChar(lOut_file, aCheck_value_length);
             // TODO Implémenter le load check value
-            /*size += file.WriteChar(lOut_file, aCheck_value_length);
-            switch(aCheck_value_type) {
+            /*switch(aCheck_value_type) {
             	case 4 :
                 	size += file.WriteChar(lOut_file, aCheck_value_type);
                 	aCheck_value = ;

@@ -72,23 +72,23 @@ public class software_part {
                                        a_load_integrity_check);
         // Build the header file
         aHeader_file.BuildHeaderFile(a_norm_version);
-        // CRC32 : data files, support files and then header file (see ARINC665-2 §2.2.3.1.36 or ARINC665-3 §2.2.3.1.63)
+        // CRC32 : header file, data files, support files (see ARINC665-2 §2.2.3.1.35 or ARINC665-3 §2.2.3.1.63)
         // Initialize the CRC32
         aCRC32 = 0xFFFFFFFF;
+        // Calculate the CRC32 of the header file
+        aCRC32 = integrity_check.CalculateCRC32(aHeader_file.aSub_directory + "/" + aHeader_file.aName, aHeader_file.aLength * 2, aCRC32, false);
         // Calculate the CRC32 of each data files
         for(i=0;i < aData_file.aName.length;i++) {
-            aCRC32 = integrity_check.CalculateCRC32(aData_file.aSub_directory + "/" + aData_file.aName[i], aData_file.aLength_in_bytes[i], aCRC32, false);
+            aCRC32 = integrity_check.CalculateCRC32(aData_file.aSub_directory + "/" + aData_file.aName[i], aData_file.aLength_in_bytes[i], aCRC32, (((aSupport_file == null) && ((i+1) == aData_file.aName.length)) ? true : false));
         }
         // Calculate the CRC32 of each support files
         if (aSupport_file != null) {
         	for(i=0;i < aSupport_file.aName.length;i++) {
-                aCRC32 = integrity_check.CalculateCRC32(aSupport_file.aPath[i] + "/" + aSupport_file.aName[i], aSupport_file.aLength[i] * 2, aCRC32, false);
+                aCRC32 = integrity_check.CalculateCRC32(aSupport_file.aPath[i] + "/" + aSupport_file.aName[i], aSupport_file.aLength[i] * 2, aCRC32, (((i+1) == aSupport_file.aName.length) ? true : false));
         	}
         }
         else {
         }
-        // Calculate the CRC32 of the header file
-        aCRC32 = integrity_check.CalculateCRC32(aHeader_file.aSub_directory + "/" + aHeader_file.aName, aHeader_file.aLength * 2, aCRC32, true);
         // Add the calculated CRC32 at the end of header file
         if (a_F_with_CRC) {
             integrity_check.AddCRC32AtEndOfFile(aHeader_file.aSub_directory + "/" + aHeader_file.aName, aCRC32);

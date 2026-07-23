@@ -117,7 +117,7 @@ public class LSPB extends JFrame {
 	public static ARINC665 aARINC665;
 	private static ARINC_norm_version aARINC_norm_version;
 	private static final int kSIS_system_zone_size = 0x3B0;
-	private static final String kTitle = "LSPB v3.5 beta";
+	private static final String kTitle = "LSPB v3.6 beta";
 	private final String kARINC_logo = "/images/arinc_logo.jpg";
 	/**************************************************************************
 	 ** Private method : DisplayUsage                                        **
@@ -248,76 +248,80 @@ public class LSPB extends JFrame {
 		byte[] lUDD = null;
 		File lFile;
 
-		if (pXML_configuration_file.aKey.contentEquals(Hash(pMACAddress)) == false) {
+		if (pMACAddress == null) {
 			System.out.printf("*** Warning *** Load CRC32 will not be generated (replaced by 0)\n");
 			pF_with_CRC = false;
+		}
+		else if (pXML_configuration_file.aKey.contentEquals(Hash(pMACAddress)) == false) {
+				System.out.printf("*** Warning *** Load CRC32 will not be generated (replaced by 0)\n");
+				pF_with_CRC = false;
 		}
 		else {
 			pF_with_CRC = true;
 		}
-			lF_with_UDD = false;
-			if (pXML_configuration_file.aUser_data_file != null) {
-				lFile = new File(pXML_configuration_file.aUser_data_file);
-				if ((lFile.length() % 2) == 0) {
-					lUDD = new byte[(int) lFile.length()];
-				}
-				else {
-					System.out.println("*** Information *** Padding user define data with one byte");
-					lUDD = new byte[(int) lFile.length() + 1];
-				}
-				BuildFileUserDefinedData(lUDD, pXML_configuration_file.aUser_data_file);
-				lF_with_UDD = true;
-			}
-			else if (pXML_configuration_file.aUser_data_text != null) {
-				if ((pXML_configuration_file.aUser_data_text.length() % 2) == 0) {
-					lUDD = pXML_configuration_file.aUser_data_text.getBytes();
-				}
-				else {
-					System.out.println("*** Information *** Padding user define data with one byte");
-					lUDD = new byte[pXML_configuration_file.aUser_data_text.length() + 1];
-					for(int i=0;i < pXML_configuration_file.aUser_data_text.length();i++) {
-						lUDD[i] = (byte) pXML_configuration_file.aUser_data_text.charAt(i);
-					}
-					lUDD[pXML_configuration_file.aUser_data_text.length()] = 0;
-				}
-				lF_with_UDD = true;
-			}
-			else if (pXML_configuration_file.aF_HW_SW_compatibility_index_present) {
-				lUDD = new byte[2 + kSIS_system_zone_size];
-				BuildBCCUserDefinedData(lUDD, pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN);
-				lF_with_UDD = true;
+		lF_with_UDD = false;
+		if (pXML_configuration_file.aUser_data_file != null) {
+			lFile = new File(pXML_configuration_file.aUser_data_file);
+			if ((lFile.length() % 2) == 0) {
+				lUDD = new byte[(int) lFile.length()];
 			}
 			else {
-				lUDD = new byte[0];
+				System.out.println("*** Information *** Padding user define data with one byte");
+				lUDD = new byte[(int) lFile.length() + 1];
 			}
-			try {
-				aARINC665 = new ARINC665(a_norm_version,
-										 pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN,
-										 pXML_configuration_file.aLoad_type_description,
-										 pXML_configuration_file.aLoad_integrity_check,
-										 pXML_configuration_file.aLoad_type_ID,
-										 pXML_configuration_file.aInput_file,
-										 pXML_configuration_file.aInput_file_integrity_check,
-										 pXML_configuration_file.aPadding,
-										 pXML_configuration_file.aSplit_size,
-										 pXML_configuration_file.aSub_directory,
-										 pXML_configuration_file.aTHWID,
-										 pXML_configuration_file.aSupport_file,
-										 pXML_configuration_file.aSupport_file_integrity_check,
-										 pXML_configuration_file.aF_batch_required,
-										 pXML_configuration_file.aComment,
-										 lF_with_UDD,
-										 lUDD,
-										 pXML_configuration_file.aF_media_required,
-										 pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN,
-										 pF_with_CRC);
+			BuildFileUserDefinedData(lUDD, pXML_configuration_file.aUser_data_file);
+			lF_with_UDD = true;
+		}
+		else if (pXML_configuration_file.aUser_data_text != null) {
+			if ((pXML_configuration_file.aUser_data_text.length() % 2) == 0) {
+				lUDD = pXML_configuration_file.aUser_data_text.getBytes();
 			}
-			catch (ARINC665Exception e) {
-				ExitWithException(e, e.getMessage());
+			else {
+				System.out.println("*** Information *** Padding user define data with one byte");
+				lUDD = new byte[pXML_configuration_file.aUser_data_text.length() + 1];
+				for(int i=0;i < pXML_configuration_file.aUser_data_text.length();i++) {
+					lUDD[i] = (byte) pXML_configuration_file.aUser_data_text.charAt(i);
+				}
+				lUDD[pXML_configuration_file.aUser_data_text.length()] = 0;
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+			lF_with_UDD = true;
+		}
+		else if (pXML_configuration_file.aF_HW_SW_compatibility_index_present) {
+			lUDD = new byte[2 + kSIS_system_zone_size];
+			BuildBCCUserDefinedData(lUDD, pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN);
+			lF_with_UDD = true;
+		}
+		else {
+			lUDD = new byte[0];
+		}
+		try {
+			aARINC665 = new ARINC665(a_norm_version,
+									 pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN,
+									 pXML_configuration_file.aLoad_type_description,
+									 pXML_configuration_file.aLoad_integrity_check,
+									 pXML_configuration_file.aLoad_type_ID,
+									 pXML_configuration_file.aInput_file,
+									 pXML_configuration_file.aInput_file_integrity_check,
+									 pXML_configuration_file.aPadding,
+									 pXML_configuration_file.aSplit_size,
+									 pXML_configuration_file.aSub_directory,
+									 pXML_configuration_file.aTHWID,
+									 pXML_configuration_file.aSupport_file,
+									 pXML_configuration_file.aSupport_file_integrity_check,
+									 pXML_configuration_file.aF_batch_required,
+									 pXML_configuration_file.aComment,
+									 lF_with_UDD,
+									 lUDD,
+									 pXML_configuration_file.aF_media_required,
+									 pXML_configuration_file.aMMM + a_CC + pXML_configuration_file.aLoad_PN,
+									 pF_with_CRC);
+		}
+		catch (ARINC665Exception e) {
+			ExitWithException(e, e.getMessage());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/**************************************************************************
 	 ** Private method : GetDataFileSubTree                                  **
@@ -491,6 +495,8 @@ public class LSPB extends JFrame {
 		}
 		else {
 		}
+		lSubNode = new DefaultMutableTreeNode(String.format("Load check value length = %d bytes (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aHeader_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aHeader_file.aCheck_value_length), true);
+		lNode.add(lSubNode);
 		lSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aHeader_file.aCRC16), true);
 		lNode.add(lSubNode);
 		return(lNode);
@@ -640,9 +646,9 @@ public class LSPB extends JFrame {
 		pMACAddress = lNetwork.getHardwareAddress();
 		SimpleDateFormat lSdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date lToday = new Date();
-		Date l20200101 = lSdf.parse("2020-01-01");
-		// IF today is after 01/01/2020 THEN
-		if (lToday.after(l20200101)) {
+		Date l20270101 = lSdf.parse("2027-01-01");
+		// IF today is after 01/01/2027 THEN
+		if (lToday.after(l20270101)) {
 			System.out.println("Date for using beta version is over");
 			System.exit(1);
 		}
@@ -1035,14 +1041,15 @@ public class LSPB extends JFrame {
 				final Shell lShell = new Shell(lDisplay);
 				MessageBox lMessageBox = new MessageBox(lShell, SWT.ICON_INFORMATION | SWT.OK);
 				lMessageBox.setMessage("Loadable Software Part Builder (64 bits)\n" +
-						"© Assistance Informatique Toulouse 2019\n\n" +
+						"© Assistance Informatique Toulouse 2026\n\n" +
 						"Written in Java under Eclipse with SWT\n" +
 						"Start with Eclipse 3.5 Galileo + SWT 3.6.1\n" +
 						"Migration to Eclipse 3.6 Indigo + SWT 3.7.1\n" +
 						"Migration to Eclipse 3.7 Juno + SWT 3.7.1\n" +
 						"Migration to Eclipse 4.4 Luna + SWT 4.4\n" +
 						"Migration to Eclipse 4.5.2 Mars + SWT 4.4\n" +
-						"Migration to Eclipse 4.13.0 (2019-09 R) + SWT 4.13\n\n" +
+						"Migration to Eclipse 4.13.0 (2019-09 R) + SWT 4.13\n" +
+						"Migration to Eclipse 4.40 (2026-06) + SWT 4.13 + correction issue 1\n\n" +
 						"ARINC665 load generator, see limitations\n" +
 						"Input file is not modified, only splitted\n\n" +
 						"Corrections, modifications can be requested to assistanceinformatiquetoulouse@gmail.com\n"
@@ -1148,9 +1155,15 @@ public class LSPB extends JFrame {
 		pJTabbedPane.addChangeListener(changeTab);
 		pSplitPane.setLeftComponent(pJTabbedPane);
 
-		String lString = new String("ID : ");
-		for(byte b : pMACAddress) {
-			lString = lString + String.format("%02X", b);
+		String lString;
+		if (pMACAddress != null) {
+			lString = new String("ID : ");
+			for(byte b : pMACAddress) {
+				lString = lString + String.format("%02X", b);
+			}
+		}
+		else {
+			lString = new String("ID : -");
 		}
 		pStatus_bar = new StatusBar(lString);
 

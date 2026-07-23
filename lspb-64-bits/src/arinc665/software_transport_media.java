@@ -44,6 +44,7 @@ public class software_transport_media {
                                                          a_software_part.aHeader_file,
                                                          aList_of_loads_file,
                                                          a_software_part.aData_file,
+                                                         a_software_part.aSupport_file,
                                                          a_software_part.aBatch_file,
                                                          a_load_integrity_check);
         }
@@ -55,6 +56,7 @@ public class software_transport_media {
                                                          a_software_part.aHeader_file,
                                                          aList_of_loads_file,
                                                          a_software_part.aData_file,
+                                                         a_software_part.aSupport_file,
                                                          a_load_integrity_check);
         }
         // Build the list of files file
