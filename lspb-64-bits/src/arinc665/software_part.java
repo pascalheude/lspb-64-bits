@@ -41,7 +41,8 @@ public class software_part {
             aSupport_file = new support_file(a_norm_version,
             		                         a_support_file_list,
                                              a_load_PN,
-                                             a_support_file_integrity_check);
+                                             a_support_file_integrity_check,
+                                             a_sub_directory);
         }
         else {
         	aSupport_file = null;

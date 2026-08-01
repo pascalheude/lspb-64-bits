@@ -2,6 +2,10 @@ package arinc665;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 /*
  * Class : support_file
@@ -22,12 +26,13 @@ public class support_file {
     public byte[][] aCheck_value;						//                             (ARINC665-3 §2.2.3.1.54)
     public String[] aCheck_value_string;				//                             (ARINC665-3 §2.2.3.1.54)
     /**************************************************************************
-     ** Constructor : support_file                                           **
+     ** Constructor : support_file                                           
      **************************************************************************/
 	public support_file(ARINC_norm_version a_norm_version,
 			            String[] a_support_file_list,
                         String a_aPN,
-                        char an_integrity_check) throws IOException {
+                        char an_integrity_check,
+                        String a_sub_directory) throws IOException, ARINC665Exception {
 		int i;
 		int j;
         byte[] lBytes;
@@ -66,8 +71,17 @@ public class support_file {
         }
         for(i=1;i <= a_support_file_list.length;i++) {
         	lFile = new File(a_support_file_list[i - 1]);
-            aPath[i - 1] = new String(lFile.getParent());
             aName[i - 1] = new String(lFile.getName());
+            // aPath[i - 1] = new String(lFile.getParent());
+            aPath[i - 1] = new String(a_sub_directory);
+            Path source = Paths.get(a_support_file_list[i - 1]);
+            Path destination = Paths.get(a_sub_directory + "/" + aName[i - 1]);
+            try {
+            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+            }
+            catch(IOException e) {
+				throw new ARINC665Exception("*** Error *** Impossible to copy support file");
+            }
             aName_length[i - 1] = (char) aName[i - 1].length();
             lRAFile = new RandomAccessFile(a_support_file_list[i - 1], "r");
             lBytes = new byte[(int) lRAFile.length()];

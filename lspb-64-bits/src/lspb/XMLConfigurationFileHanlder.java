@@ -406,7 +406,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 else {
                 }
             }
-            if (pCurrent_number_of_THW_ID != aSupport_file.length) {
+            if (pCurrent_number_of_support_file != aSupport_file.length) {
                 throw new SAXException("*** Error *** Not enough support file");
             }
             else {

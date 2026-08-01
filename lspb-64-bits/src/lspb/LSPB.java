@@ -215,7 +215,7 @@ public class LSPB extends JFrame {
 	/**************************************************************************
 	 ** Private method : RemoveFile                                          **
 	 **************************************************************************/
-	private static void RemoveDataFile() {
+	private static void RemoveFile() {
 		File lSub_directory = new File(pXML_configuration_file.aSub_directory);
 		if (! lSub_directory.isDirectory()) {
 			if (! lSub_directory.mkdirs()) {
@@ -227,7 +227,7 @@ public class LSPB extends JFrame {
 		}
 		else {
 		}
-		File lFile = new File(pXML_configuration_file.aSub_directory + "/*.LUP");
+		File lFile = new File(pXML_configuration_file.aSub_directory + "/*.*");
 		if (lFile.exists()) {
 			lFile.delete();
 		}
@@ -671,8 +671,8 @@ public class LSPB extends JFrame {
 				System.out.println(lSdf_with_hour.format(lToday));
 				// Read XML files using filename as argument
 				ReadXMLFile(args[0]);
-				// Remove generated LUP files
-				RemoveDataFile();
+				// Remove data and support files
+				RemoveFile();
 				// Calculate CRC of load P/N
 				lCC = Integer.toHexString(integrity_check.CalculateCRC8(pXML_configuration_file.aMMM + pXML_configuration_file.aLoad_PN)).toUpperCase();
 				// Build load files
@@ -1007,7 +1007,7 @@ public class LSPB extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				String lCC;
 				DefaultMutableTreeNode lNode;
-				RemoveDataFile();
+				RemoveFile();
 				lCC = Integer.toHexString(integrity_check.CalculateCRC8(pXML_configuration_file.aMMM + pXML_configuration_file.aLoad_PN)).toUpperCase();
 				BuildLoad(lCC, aARINC_norm_version);
 				pJTreeLoad = new JTree();
