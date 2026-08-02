@@ -373,6 +373,9 @@ public class header_file {
             size += file.WriteChar(lOut_file, (char) aData_file.aPN.length());
             size += file.WriteString(lOut_file, aData_file.aPN);
             size += file.WriteInt(lOut_file, aData_file.aLength_in_bytes[i - 1] / 2);
+            // There is no need to round up the length (line above) because it's always even for 2 reasons:
+            //  1. split size is even
+            //  2. for the last data file, a padding character is added when calling constructor of data file class
             size += file.WriteChar(lOut_file, (char) aData_file.aCRC16[i - 1]);
             if (a_norm_version == ARINC_norm_version.ARINC665_3) {
             	size += file.WriteInt(lOut_file, 0);

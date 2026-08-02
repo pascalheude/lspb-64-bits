@@ -191,7 +191,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 int j = a_attr.getIndex("padding");
                 if (j != -1) {
                     Integer i = new Integer(a_attr.getValue("padding"));
-                    aPadding = (byte) i.intValue();
+                    aPadding = (byte) (i.intValue() & 0xFF);
                 }
                 else {
                 	aPadding = 0;
