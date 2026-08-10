@@ -16,17 +16,17 @@ public class data_file {
     private String pFile_to_split;
     private int pFile_size;
     public String aSub_directory;
-    public char[] aPointer;								// (ARINC665-2 §2.2.3.1.15)    (ARINC665-3 §2.2.3.1.32)
-    public char aName_length;							// (ARINC665-2 §2.2.3.1.16)    (ARINC665-3 §2.2.3.1.33)
+    public char[] aPointer;								// (ARINC665-2 ï¿½2.2.3.1.15)    (ARINC665-3 ï¿½2.2.3.1.32)		(ARINC665-4 ï¿½2.2.3.1.32)
+    public char aName_length;							// (ARINC665-2 ï¿½2.2.3.1.16)    (ARINC665-3 ï¿½2.2.3.1.33)		(ARINC665-4 ï¿½2.2.3.1.33)
     // do not need to be a table [] because the length of each data filename is always the same
-    public String[] aName;								// (ARINC665-2 §2.2.3.1.17)    (ARINC665-3 §2.2.3.1.34)
-    public String aPN;									// (ARINC665-2 §2.2.3.1.18-19) (ARINC665-3 §2.2.3.1.35-36)
-    public int[] aLength_in_bytes;						// (ARINC665-2 §2.2.3.1.20)    (ARINC665-3 §2.2.3.1.37,39)
-    public int[] aCRC16;								// (ARINC665-2 §2.2.3.1.21)    (ARINC665-3 §2.2.3.1.38)
-    public char aCheck_value_length;					//                             (ARINC665-3 §2.2.3.1.40)
-    public char aCheck_value_type;						//                             (ARINC665-3 §2.2.3.1.41)
-    public byte[][] aCheck_value;						//                             (ARINC665-3 §2.2.3.1.42)
-    public String[] aCheck_value_string;				//                             (ARINC665-3 §2.2.3.1.42)
+    public String[] aName;								// (ARINC665-2 ï¿½2.2.3.1.17)    (ARINC665-3 ï¿½2.2.3.1.34)		(ARINC665-4 ï¿½2.2.3.1.34)
+    public String aPN;									// (ARINC665-2 ï¿½2.2.3.1.18-19) (ARINC665-3 ï¿½2.2.3.1.35-36)	(ARINC665-4 ï¿½2.2.3.1.35-36)
+    public int[] aLength_in_bytes;						// (ARINC665-2 ï¿½2.2.3.1.20)    (ARINC665-3 ï¿½2.2.3.1.37,39)	(ARINC665-4 ï¿½2.2.3.1.37,39)
+    public int[] aCRC16;								// (ARINC665-2 ï¿½2.2.3.1.21)    (ARINC665-3 ï¿½2.2.3.1.38)		(ARINC665-4 ï¿½2.2.3.1.38)
+    public char aCheck_value_length;					//                            (ARINC665-3 ï¿½2.2.3.1.40)	(ARINC665-4 ï¿½2.2.3.1.40)
+    public char aCheck_value_type;						//                            (ARINC665-3 ï¿½2.2.3.1.41)	(ARINC665-4 ï¿½2.2.3.1.41)
+    public byte[][] aCheck_value;						//                            (ARINC665-3 ï¿½2.2.3.1.42)	(ARINC665-4 ï¿½2.2.3.1.42)
+    public String[] aCheck_value_string;				//                            (ARINC665-3 ï¿½2.2.3.1.42)	(ARINC665-4 ï¿½2.2.3.1.42)
     public boolean[] aPadding;
     /**************************************************************************
      ** Constructor : data_file                                              **
@@ -71,7 +71,8 @@ public class data_file {
     	aCheck_value_type = 0;
     	aCheck_value = null;
     	aCheck_value_string = null;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             switch(an_integrity_check) {
             	case 4 :
                 	aCheck_value_length = 20;
@@ -101,7 +102,8 @@ public class data_file {
             }
             else {
                 aPointer[i - 1] = (char) (1 + 1 + ((1 + aName_length) / 2) + 1 + ((1 + aPN.length()) / 2) + 2 + 1);
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	aPointer[i - 1] += 4 +
                 			           1;
                 	switch(aCheck_value_type) {
@@ -138,8 +140,8 @@ public class data_file {
                  for(j=0;j < lRead_byte;j++) {
                      lBytes[j] = lRead_bytes[j];
                  }
-                 // Chez LTS (fichier texte contenant du format S au format UNIX), le padding ne consiste pas à ajouter un caractère à la fin du fichier
-                 // mais à insérer un caractère #13 en avant dernière position sachant que le dernier caractère sera #10
+                 // Chez LTS (fichier texte contenant du format S au format UNIX), le padding ne consiste pas ï¿½ ajouter un caractï¿½re ï¿½ la fin du fichier
+                 // mais ï¿½ insï¿½rer un caractï¿½re #13 en avant derniï¿½re position sachant que le dernier caractï¿½re sera #10
                  lBytes[lRead_byte] = a_padding_char;
                  lRead_byte++;
              }
@@ -150,7 +152,8 @@ public class data_file {
              aLength_in_bytes[i - 1] = lRead_byte;
              aCRC16[i - 1] = integrity_check.CalculateCRC16(lBytes, lBytes.length);
              System.out.printf("*** Information *** CRC16 of file %s : 0x%04X\n", aSub_directory + "/" + aName[i - 1], aCRC16[i - 1]);
-             if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+             	 (a_norm_version == ARINC_norm_version.ARINC665_4)) {
                  switch(aCheck_value_type) {
                  	case 4 :
                         try {

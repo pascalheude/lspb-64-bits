@@ -11,32 +11,32 @@ import lspb.file;
  **                                                                      **
  **************************************************************************/
 public class list_of_loads_file {
-	// (ARINC665-2 §3.2.3.1) (ARINC665-3 §3.2.3.1)
+	// (ARINC665-2 ï¿½3.2.3.1) (ARINC665-3 ï¿½3.3.2.3.1) (ARINC665-4 ï¿½3.3.2.3.1)
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
     private static final String kFile_extension = "LUM";
     public String aName;
-    public int aLength;									// (ARINC665-2 §3.2.3.1.1)     (ARINC665-3 §3.2.3.1.1)
-    public char aVersion;								// (ARINC665-2 §3.2.3.1.2)     (ARINC665-3 §3.2.3.1.2)
-    public final char kSpare = 0;						// (ARINC665-2 §3.2.3.1.3)     (ARINC665-3 §3.2.3.1.3)
-    public int aPointer_to_MI;							// (ARINC665-2 §3.2.3.1.4)     (ARINC665-3 §3.2.3.1.4)
-    public int aPointer_to_load_list;					// (ARINC665-2 §3.2.3.1.5)     (ARINC665-3 §3.2.3.1.5)
-    public int aPointer_to_UDD;							// (ARINC665-2 §3.2.3.1.6)     (ARINC665-3 §3.2.3.1.6)
-    public char aMSPN_length;							// (ARINC665-2 §3.2.3.1.8)     (ARINC665-3 §3.2.3.1.8)
-    public String aMSPN;								// (ARINC665-2 §3.2.3.1.9)     (ARINC665-3 §3.2.3.1.9)
-    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 §3.2.3.1.10)    (ARINC665-3 §3.2.3.1.10)
-    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 §3.2.3.1.11)    (ARINC665-3 §3.2.3.1.11)
-    public final char aNumber_of_load = 1;				// (ARINC665-2 §3.2.3.1.12)    (ARINC665-3 §3.2.3.1.12)
-    public final char aLoad_pointer = 0;				// (ARINC665-2 §3.2.3.1.13)    (ARINC665-3 §3.2.3.1.13)
-    public char aLPN_length;							// (ARINC665-2 §3.2.3.1.14)    (ARINC665-3 §3.2.3.1.14)
-    public String aLoad_PN;								// (ARINC665-2 §3.2.3.1.15)    (ARINC665-3 §3.2.3.1.15)
-    public char aHFN_length;							// (ARINC665-2 §3.2.3.1.16)    (ARINC665-3 §3.2.3.1.16)
-    public String aHeader_file_name;					// (ARINC665-2 §3.2.3.1.17)    (ARINC665-3 §3.2.3.1.17)
-    public final char aMember_sequence_number = 1;		// (ARINC665-2 §3.2.3.1.18)    (ARINC665-3 §3.2.3.1.18)
-    public char aNumber_of_THWID;						// (ARINC665-2 §3.2.3.1.19)    (ARINC665-3 §3.2.3.1.19)
-    public String[] aTHWID_list;						// (ARINC665-2 §3.2.3.1.20-21) (ARINC665-3 §3.2.3.1.20-21)
-    public int aCRC16;									// (ARINC665-2 §3.2.3.1.25)    (ARINC665-3 §3.2.3.1.25)
+    public int aLength;									// (ARINC665-2 ï¿½3.2.3.1.1)     (ARINC665-3 ï¿½3.3.2.3.1.1)     (ARINC665-4 ï¿½3.3.2.3.1.1)
+    public char aVersion;								// (ARINC665-2 ï¿½3.2.3.1.2)     (ARINC665-3 ï¿½3.3.2.3.1.2)     (ARINC665-4 ï¿½3.3.2.3.1.2)
+    public final char kSpare = 0;						// (ARINC665-2 ï¿½3.2.3.1.3)     (ARINC665-3 ï¿½3.3.2.3.1.3)     (ARINC665-4 ï¿½3.3.2.3.1.3)
+    public int aPointer_to_MI;							// (ARINC665-2 ï¿½3.2.3.1.4)     (ARINC665-3 ï¿½3.3.2.3.1.4)     (ARINC665-4 ï¿½3.3.2.3.1.4)
+    public int aPointer_to_load_list;					// (ARINC665-2 ï¿½3.2.3.1.5)     (ARINC665-3 ï¿½3.3.2.3.1.5)     (ARINC665-4 ï¿½3.3.2.3.1.5)
+    public int aPointer_to_UDD;							// (ARINC665-2 ï¿½3.2.3.1.6)     (ARINC665-3 ï¿½3.3.2.3.1.6)     (ARINC665-4 ï¿½3.3.2.3.1.6)
+    public char aMSPN_length;							// (ARINC665-2 ï¿½3.2.3.1.8)     (ARINC665-3 ï¿½3.3.2.3.1.8)     (ARINC665-4 ï¿½3.3.2.3.1.8)
+    public String aMSPN;								// (ARINC665-2 ï¿½3.2.3.1.9)     (ARINC665-3 ï¿½3.3.2.3.1.9)     (ARINC665-4 ï¿½3.3.2.3.1.9)
+    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 ï¿½3.2.3.1.10)    (ARINC665-3 ï¿½3.3.2.3.1.10)    (ARINC665-4 ï¿½3.3.2.3.1.10)
+    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 ï¿½3.2.3.1.11)    (ARINC665-3 ï¿½3.3.2.3.1.11)    (ARINC665-4 ï¿½3.3.2.3.1.11)
+    public final char aNumber_of_load = 1;				// (ARINC665-2 ï¿½3.2.3.1.12)    (ARINC665-3 ï¿½3.3.2.3.1.12)    (ARINC665-4 ï¿½3.3.2.3.1.12)
+    public final char aLoad_pointer = 0;				// (ARINC665-2 ï¿½3.2.3.1.13)    (ARINC665-3 ï¿½3.3.2.3.1.13)    (ARINC665-4 ï¿½3.3.2.3.1.13)
+    public char aLPN_length;							// (ARINC665-2 ï¿½3.2.3.1.14)    (ARINC665-3 ï¿½3.3.2.3.1.14)    (ARINC665-4 ï¿½3.3.2.3.1.14)
+    public String aLoad_PN;								// (ARINC665-2 ï¿½3.2.3.1.15)    (ARINC665-3 ï¿½3.3.2.3.1.15)    (ARINC665-4 ï¿½3.3.2.3.1.15)
+    public char aHFN_length;							// (ARINC665-2 ï¿½3.2.3.1.16)    (ARINC665-3 ï¿½3.3.2.3.1.16)    (ARINC665-4 ï¿½3.3.2.3.1.16)
+    public String aHeader_file_name;					// (ARINC665-2 ï¿½3.2.3.1.17)    (ARINC665-3 ï¿½3.3.2.3.1.17)    (ARINC665-4 ï¿½3.3.2.3.1.17)
+    public final char aMember_sequence_number = 1;		// (ARINC665-2 ï¿½3.2.3.1.18)    (ARINC665-3 ï¿½3.3.2.3.1.18)    (ARINC665-4 ï¿½3.3.2.3.1.18)
+    public char aNumber_of_THWID;						// (ARINC665-2 ï¿½3.2.3.1.19)    (ARINC665-3 ï¿½3.3.2.3.1.19)    (ARINC665-4 ï¿½3.3.2.3.1.19)
+    public String[] aTHWID_list;						// (ARINC665-2 ï¿½3.2.3.1.20-21) (ARINC665-3 ï¿½3.3.2.3.1.20-21) (ARINC665-4 ï¿½3.3.2.3.1.20-21)
+    public int aCRC16;									// (ARINC665-2 ï¿½3.2.3.1.25)    (ARINC665-3 ï¿½3.3.2.3.1.25)    (ARINC665-4 ï¿½3.3.2.3.1.25)
     public String aHexa_dump;
     /**************************************************************************
      ** Constructor : list_of_loads_file                                     **

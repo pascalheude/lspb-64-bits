@@ -72,7 +72,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
 	 ** Private method : DisplayUsage                                        **
 	 **************************************************************************/
 	private static char GetIntegrityCheckValue(String a_string) {
-        if (a_string.equals("MD5")) {
+		if (a_string.equals("MD5")) {
             return(4);
         }
         else if (a_string.equals("SHA-1")) {
@@ -95,7 +95,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             try {
                 int j = a_attr.getIndex("version");
                 if (j != -1) {
-                    Integer i = new Integer(a_attr.getValue("version"));
+                    Integer i = Integer.valueOf(a_attr.getValue("version"));
                     aNorm_version = i.intValue();
                 }
                 else {
@@ -105,8 +105,8 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             catch(Exception e) {
             	aNorm_version = 0;
             }
-            if ((aNorm_version < 1) || (aNorm_version > 3)) {
-            	throw new SAXException("*** Error *** ARINC665 version shall be 1 or 2 or 3.");
+            if ((aNorm_version < 1) || (aNorm_version > 4)) {
+            	throw new SAXException("*** Error *** ARINC665 version shall be 1 or 2 or 3 or 4.");
             }
             else {
             }
@@ -158,7 +158,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 try {
                     int j = a_attr.getIndex("id");
                     if (j != -1) {
-                        Integer i = new Integer(a_attr.getValue("id"));
+                        Integer i = Integer.valueOf(a_attr.getValue("id"));
                         aLoad_type_ID = (char) i.intValue();
                     }
                     else {
@@ -190,7 +190,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             try {
                 int j = a_attr.getIndex("padding");
                 if (j != -1) {
-                    Integer i = new Integer(a_attr.getValue("padding"));
+                    Integer i = Integer.valueOf(a_attr.getValue("padding"));
                     aPadding = (byte) (i.intValue() & 0xFF);
                 }
                 else {
@@ -210,7 +210,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
         else if (a_qualified_name.equals("THW_ID_LIST"))  {
             pXML_tag = T_XMLTag.THW_ID_LIST;
             try {
-                Integer i = new Integer(a_attr.getValue("number"));
+                Integer i = Integer.valueOf(a_attr.getValue("number"));
                 if (i <= 0) {
                     throw new SAXException("*** Error *** Number in tag THW_ID_LIST shall be greater than 0");
                 }
@@ -245,7 +245,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             	aSupport_file_integrity_check = 0;
             }
             try {
-                Integer i = new Integer(a_attr.getValue("number"));
+                Integer i = Integer.valueOf(a_attr.getValue("number"));
                 if (i < 0) {
                     throw new SAXException("*** Error *** Number in tag SUPPORT_FILE_LIST shall be greater than 0");
                 }
@@ -438,7 +438,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 	int i;
             		for (i=0;(i < (2 * (aKey.length() / 2))) && (i < 12);i+=2) {
             			//lKey = "0x" + aKey.substring(i, i + 1);
-            			Integer b = new Integer(0);
+            			Integer b = Integer.valueOf(0);
             			b = Integer.parseInt(aKey.substring(i, i + 2), 16);
             			aDefaultMACAddress[i / 2] = b.byteValue();
             		}
@@ -546,7 +546,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 System.out.printf("Directory : %s\n", aSub_directory);
                 break;
             case SPLIT_SIZE :
-                Integer i = new Integer(lString);
+                Integer i = Integer.valueOf(lString);
                 aSplit_size = i.intValue();
                 if ((i <= 0) ||
                     ((i & 1) == 1)) {
@@ -626,7 +626,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             	System.out.printf("User data text : %s\n", aUser_data_text);
                 break;
             case HW_SW_COMPATIBILITY_INDEX :
-                Integer j = new Integer(lString);
+                Integer j = Integer.valueOf(lString);
                 aHW_SW_compatibility_index = (char) j.intValue();
                 System.out.printf("HW/SW compatibility index : %d\n", (int) aHW_SW_compatibility_index);
                 if (aHW_SW_compatibility_index == 0) {

@@ -4,7 +4,7 @@ package arinc665;
  * Class : software_part
  */
 public class software_part {
-    // (ARINC665-2 §2.0) (ARINC665-3 §2.0)
+    // (ARINC665-2 ï¿½2.0) (ARINC665-3 ï¿½2.0)
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
@@ -73,7 +73,7 @@ public class software_part {
                                        a_load_integrity_check);
         // Build the header file
         aHeader_file.BuildHeaderFile(a_norm_version);
-        // CRC32 : header file, data files, support files (see ARINC665-2 §2.2.3.1.35 or ARINC665-3 §2.2.3.1.63)
+        // CRC32 : header file, data files, support files (see ARINC665-2 ï¿½2.2.3.1.35 or ARINC665-3/ARINC665-4 ï¿½2.2.3.1.63)
         // Initialize the CRC32
         aCRC32 = 0xFFFFFFFF;
         // Calculate the CRC32 of the header file

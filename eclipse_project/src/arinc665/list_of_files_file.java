@@ -11,36 +11,36 @@ import lspb.file;
  * Class : list_of_files_file
  */
 public class list_of_files_file {
-	// (ARINC665-2 §3.2.3.2) (ARINC665-3 §3.2.3.2)
+	// (ARINC665-2 ï¿½3.2.3.2) (ARINC665-3 ï¿½3.3.2.3.2) (ARINC665-4 ï¿½3.3.2.3.2)
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
     private static final String kFile_extension = "LUM";
     private String pName;
-    public int aLength;									//                             (ARINC665-3 §3.2.3.2.1)
-    public char aVersion;								// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.2)
-    public final char kSpare = 0;						// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.3)
-    public int aPointer_to_Media_Information;			// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.4)
-    public int aPointer_to_File_List;					// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.5)
-    public int aPointer_to_UDD;							// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.6)
-    public int aPointer_to_FCV;							//                             (ARINC665-3 §3.2.3.2.7)
-    public char aMSPN_length;							// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.9)
-    public String aMSPN;								// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.10)
-    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.11)
-    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.12)
-    public char aNumber_of_media_set_files;				// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.13)
-    public char[] aFile_pointer;						// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.14)
-    public char[] aFN_length;							// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.15)
-    public String[] aFile_name;							// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.16)
-    public char[] aFP_length;							// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.17)
-    public String[] aFile_pathname;						// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.18)
-    public final char aFile_member_sequence_number = 1;	// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.19)
-    public int[] aFile_CRC;								// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.20)
-    public char aCheck_value_length;					//                             (ARINC665-3 §3.2.3.2.27)
-    public char aCheck_value_type;						//                             (ARINC665-3 §3.2.3.2.28)
-    public byte[] aCheck_value;							//                             (ARINC665-3 §3.2.3.2.29)
-    public String aCheck_value_string;					//                             (ARINC665-3 §3.2.3.2.29)
-    public int aCRC16;									// (ARINC665-2 §3.2.3.2.XX)    (ARINC665-3 §3.2.3.2.30)
+    public int aLength;									//                            (ARINC665-3 ï¿½3.3.2.3.2.1)	(ARINC665-4 ï¿½3.3.2.3.2.1)
+    public char aVersion;								// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.2)	(ARINC665-4 ï¿½3.3.2.3.2.2)
+    public final char kSpare = 0;						// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.3)	(ARINC665-4 ï¿½3.3.2.3.2.3)
+    public int aPointer_to_Media_Information;			// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.4)	(ARINC665-4 ï¿½3.3.2.3.2.4)
+    public int aPointer_to_File_List;					// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.5)	(ARINC665-4 ï¿½3.3.2.3.2.5)
+    public int aPointer_to_UDD;							// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.6)	(ARINC665-4 ï¿½3.3.2.3.2.6)
+    public int aPointer_to_FCV;							//                            (ARINC665-3 ï¿½3.3.2.3.2.7)	(ARINC665-4 ï¿½3.3.2.3.2.7)
+    public char aMSPN_length;							// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.9)	(ARINC665-4 ï¿½3.3.2.3.2.9)
+    public String aMSPN;								// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.10)	(ARINC665-4 ï¿½3.3.2.3.2.10)
+    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.11)	(ARINC665-4 ï¿½3.3.2.3.2.11)
+    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.12)	(ARINC665-4 ï¿½3.3.2.3.2.12)
+    public char aNumber_of_media_set_files;				// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.13)	(ARINC665-4 ï¿½3.3.2.3.2.13)
+    public char[] aFile_pointer;						// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.14)	(ARINC665-4 ï¿½3.3.2.3.2.14)
+    public char[] aFN_length;							// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.15)	(ARINC665-4 ï¿½3.3.2.3.2.15)
+    public String[] aFile_name;							// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.16)	(ARINC665-4 ï¿½3.3.2.3.2.16)
+    public char[] aFP_length;							// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.17)	(ARINC665-4 ï¿½3.3.2.3.2.17)
+    public String[] aFile_pathname;						// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.18)	(ARINC665-4 ï¿½3.3.2.3.2.18)
+    public final char aFile_member_sequence_number = 1;	// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.19)	(ARINC665-4 ï¿½3.3.2.3.2.19)
+    public int[] aFile_CRC;								// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.20)	(ARINC665-4 ï¿½3.3.2.3.2.20)
+    public char aCheck_value_length;					//                            (ARINC665-3 ï¿½3.3.2.3.2.27)	(ARINC665-4 ï¿½3.3.2.3.2.27)
+    public char aCheck_value_type;						//                            (ARINC665-3 ï¿½3.3.2.3.2.28)	(ARINC665-4 ï¿½3.3.2.3.2.28)
+    public byte[] aCheck_value;							//                            (ARINC665-3 ï¿½3.3.2.3.2.29)	(ARINC665-4 ï¿½3.3.2.3.2.29)
+    public String aCheck_value_string;					//                            (ARINC665-3 ï¿½3.3.2.3.2.29)	(ARINC665-4 ï¿½3.3.2.3.2.29)
+    public int aCRC16;									// (ARINC665-2 ï¿½3.2.3.2.XX)    (ARINC665-3 ï¿½3.3.2.3.2.30)	(ARINC665-4 ï¿½3.3.2.3.2.30)
     public String aHexa_dump;
     /**************************************************************************
      ** Constructor : list_of_files_file                                     **
@@ -146,7 +146,8 @@ public class list_of_files_file {
         aFile_CRC[0] = a_header_file.aCRC16;
         // Increase the length (size of File CRC field)
         aLength++;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -160,7 +161,8 @@ public class list_of_files_file {
                                    ((1 + a_sub_directory.length() + 2) / 2) +
                                    1 +
                                    1);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	aFile_pointer[0]++;
         }
         else {
@@ -195,7 +197,8 @@ public class list_of_files_file {
         aFile_CRC[1] = a_list_of_loads_file.aCRC16;
         // Increase the length (size of File CRC field)
         aLength++;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -209,7 +212,8 @@ public class list_of_files_file {
                                    ((1 + 1) / 2) +
                                    1 +
                                    1);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	aFile_pointer[1]++;
         }
         else {
@@ -217,7 +221,7 @@ public class list_of_files_file {
         // Increase the length (size of File Pointer field)
         aLength++;
 
-        // Batch file (see ARINC665-2 §2.3.1)
+        // Batch file (see ARINC665-2 ï¿½2.3.1)
         // Third file (index = 2)
         file_index = 2;
         // Set the File Name Length field
@@ -244,7 +248,8 @@ public class list_of_files_file {
         aFile_CRC[2] = a_batch_file.aCRC16;
         // Increase the length (size of File CRC field)
         aLength++;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -258,7 +263,8 @@ public class list_of_files_file {
                                    ((1 + 1) / 2) +
                                    1 +
                                    1);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	aFile_pointer[2]++;
         }
         else {
@@ -294,7 +300,8 @@ public class list_of_files_file {
             aFile_CRC[i + 3] = a_data_file.aCRC16[i];
             // Increase the length (size of File CRC field)
             aLength++;
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	// Increase the length (size of File Check Value Length field)
             	aLength++;
             }
@@ -313,7 +320,8 @@ public class list_of_files_file {
                                                ((1 + a_sub_directory.length() + 2) / 2) +
                                                1 +
                                                1);
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	aFile_pointer[i + 3]++;
                 }
                 else {
@@ -352,7 +360,8 @@ public class list_of_files_file {
                 aFile_CRC[i + file_index] = a_support_file.aCRC16[i];
                 // Increase the length (size of File CRC field)
                 aLength++;
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	// Increase the length (size of File Check Value Length field)
                 	aLength++;
                 }
@@ -371,7 +380,8 @@ public class list_of_files_file {
                                                    ((1 + a_sub_directory.length() + 2) / 2) +
                                                    1 +
                                                    1);
-                    if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                    if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                    	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                     	aFile_pointer[i + file_index]++;
                     }
                     else {
@@ -385,7 +395,8 @@ public class list_of_files_file {
         }
         
         // Add the FILES.LUM File Check Value fields if requested
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             // Set the Pointer to FILES.LUM File Check Value field
             aPointer_to_FCV = aLength;
             // Increase the length (size of FILES.LUM File Check Value Length field)
@@ -524,7 +535,8 @@ public class list_of_files_file {
         aFile_CRC[0] = a_header_file.aCRC16;
         // Increase the length (size of File CRC field)
         aLength++;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -538,7 +550,8 @@ public class list_of_files_file {
                                    ((1 + a_sub_directory.length() + 2) / 2) +
                                    1 +
                                    1);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	aFile_pointer[0]++;
         }
         else {
@@ -573,7 +586,8 @@ public class list_of_files_file {
         aFile_CRC[1] = a_list_of_loads_file.aCRC16;
         // Increase the length (size of File CRC field)
         aLength++;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -587,7 +601,8 @@ public class list_of_files_file {
                                    ((1 + 1) / 2) +
                                    1 +
                                    1);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	aFile_pointer[1]++;
         }
         else {
@@ -623,7 +638,8 @@ public class list_of_files_file {
             aFile_CRC[i + 2] = a_data_file.aCRC16[i];
             // Increase the length (size of File CRC field)
             aLength++;
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	// Increase the length (size of File Check Value Length field)
             	aLength++;
             }
@@ -642,7 +658,8 @@ public class list_of_files_file {
                                                ((1 + a_sub_directory.length() + 2) / 2) +
                                                1 +
                                                1);
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	aFile_pointer[i + 2]++;
                 }
                 else {
@@ -681,7 +698,8 @@ public class list_of_files_file {
                 aFile_CRC[i + file_index] = a_support_file.aCRC16[i];
                 // Increase the length (size of File CRC field)
                 aLength++;
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	// Increase the length (size of File Check Value Length field)
                 	aLength++;
                 }
@@ -700,7 +718,8 @@ public class list_of_files_file {
                                                    ((1 + a_sub_directory.length() + 2) / 2) +
                                                    1 +
                                                    1);
-                    if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                    if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                    	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                     	aFile_pointer[i + file_index]++;
                     }
                     else {
@@ -714,7 +733,8 @@ public class list_of_files_file {
         }
         
         // Add the FILES.LUM File Check Value fields if requested
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             // Set the Pointer to FILES.LUM File Check Value field
             aPointer_to_FCV = aLength;
             // Increase the length (size of FILES.LUM File Check Value Length field)
@@ -768,7 +788,8 @@ public class list_of_files_file {
         size += file.WriteInt(lOut_file, aPointer_to_Media_Information);
         size += file.WriteInt(lOut_file, aPointer_to_File_List);
         size += file.WriteInt(lOut_file, aPointer_to_UDD);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	size += file.WriteInt(lOut_file, aPointer_to_FCV);
         }
         else {
@@ -788,7 +809,8 @@ public class list_of_files_file {
             size += file.WriteString(lOut_file, aFile_pathname[i]);
             size += file.WriteChar(lOut_file, aFile_member_sequence_number);
             size += file.WriteChar(lOut_file, (char) aFile_CRC[i]);
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	size += file.WriteChar(lOut_file, (char)0);
             }
             else {
@@ -796,7 +818,8 @@ public class list_of_files_file {
         }
         lOut_file.close();
         // Write File Check Value fields if requested
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	RandomAccessFile lFile = new RandomAccessFile(pName, "rw");
         	byte[] lBytes = new byte[(int) lFile.length()];
         	lFile.read(lBytes);

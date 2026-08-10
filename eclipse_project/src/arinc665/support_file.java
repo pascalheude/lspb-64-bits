@@ -14,17 +14,17 @@ public class support_file {
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
-    public char[] aPointer;								// (ARINC665-2 §2.2.3.1.XX)    (ARINC665-3 §2.2.3.1.45)
-    public String[] aPath;								// (ARINC665-2 §2.2.3.1.XX-XX) (ARINC665-3 §2.2.3.1.46-47)
+    public char[] aPointer;								// (ARINC665-2 ï¿½2.2.3.1.XX)    (ARINC665-3 ï¿½2.2.2.3.1.45)    (ARINC665-4 ï¿½2.2.2.3.1.45)
+    public String[] aPath;								// (ARINC665-2 ï¿½2.2.3.1.XX-XX) (ARINC665-3 ï¿½2.2.2.3.1.46-47) (ARINC665-4 ï¿½2.2.2.3.1.46-47)
     public String[] aName;
     public char aName_length[];
-    public String aPN;									// (ARINC665-2 §2.2.3.1.XX-XX) (ARINC665-3 §2.2.3.1.48-49)
-    public int[] aLength;								// (ARINC665-2 §2.2.3.1.XX)    (ARINC665-3 §2.2.3.1.50)
-    public int[] aCRC16;								// (ARINC665-2 §2.2.3.1.XX)    (ARINC665-3 §2.2.3.1.51)
-    public char aCheck_value_length;					//                             (ARINC665-3 §2.2.3.1.52)
-    public char aCheck_value_type;						//                             (ARINC665-3 §2.2.3.1.53)
-    public byte[][] aCheck_value;						//                             (ARINC665-3 §2.2.3.1.54)
-    public String[] aCheck_value_string;				//                             (ARINC665-3 §2.2.3.1.54)
+    public String aPN;									// (ARINC665-2 ï¿½2.2.3.1.XX-XX) (ARINC665-3 ï¿½2.2.2.3.1.48-49) (ARINC665-4 ï¿½2.2.2.3.1.48-49)
+    public int[] aLength;								// (ARINC665-2 ï¿½2.2.3.1.XX)    (ARINC665-3 ï¿½2.2.2.3.1.50)    (ARINC665-4 ï¿½2.2.2.3.1.50)
+    public int[] aCRC16;								// (ARINC665-2 ï¿½2.2.3.1.XX)    (ARINC665-3 ï¿½2.2.2.3.1.51)    (ARINC665-4 ï¿½2.2.2.3.1.51)
+    public char aCheck_value_length;					//                            (ARINC665-3 ï¿½2.2.2.3.1.52)   (ARINC665-4 ï¿½2.2.2.3.1.52)
+    public char aCheck_value_type;						//                            (ARINC665-3 ï¿½2.2.2.3.1.53)   (ARINC665-4 ï¿½2.2.2.3.1.53)
+    public byte[][] aCheck_value;						//                            (ARINC665-3 ï¿½2.2.2.3.1.54)   (ARINC665-4 ï¿½2.2.2.3.1.54)
+    public String[] aCheck_value_string;				//                            (ARINC665-3 ï¿½2.2.2.3.1.54)   (ARINC665-4 ï¿½2.2.2.3.1.54)
     /**************************************************************************
      ** Constructor : support_file                                           
      **************************************************************************/
@@ -50,7 +50,8 @@ public class support_file {
     	aCheck_value_type = 0;
     	aCheck_value = null;
     	aCheck_value_string = null;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             switch(an_integrity_check) {
             	case 4 :
                 	aCheck_value_length = 20;
@@ -90,7 +91,8 @@ public class support_file {
             aLength[i - 1] = lBytes.length;
             aCRC16[i - 1] = integrity_check.CalculateCRC16(lBytes, lBytes.length);
             System.out.printf("*** Information *** CRC16 of support file #%d %s : 0x%04X\n", i, aName[i - 1], aCRC16[i - 1]);
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 switch(aCheck_value_type) {
                 	case 4 :
                        try {
@@ -128,7 +130,8 @@ public class support_file {
             }
             else {
                 aPointer[i - 1] = (char) (1 + 1 + ((1 + aName_length[i - 1]) / 2) + 1 + ((1 + aPN.length()) / 2) + 2 + 1);
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	switch(aCheck_value_type) {
                 		case 4 :
                 		case 5 :

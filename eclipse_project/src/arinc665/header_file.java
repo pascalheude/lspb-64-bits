@@ -27,32 +27,32 @@ public class header_file {
     private static final String kFile_extension = "LUH";
     public String aSub_directory;
     public String aName;
-    public int aLength;									// (ARINC665-2 �2.2.3.1.1)     (ARINC665-3 �2.2.3.1.1)
-    public char aVersion;								// (ARINC665-2 �2.2.3.1.2)     (ARINC665-3 �2.2.3.1.2)
+    public int aLength;									// (ARINC665-2 �2.2.3.1.1)     (ARINC665-3 �2.2.3.1.1)		(ARINC665-4 �2.2.3.1.1)
+    public char aVersion;								// (ARINC665-2 �2.2.3.1.2)     (ARINC665-3 �2.2.3.1.2)		(ARINC665-4 �2.2.3.1.2)
     public final char kSpare = 0;						// (ARINC665-2 �2.2.3.1.3)
-    public char aPartFlags;								//                             (ARINC665-3 �2.2.3.1.3)
-    public int aPointer_to_LPN;							//                             (ARINC665-3 �2.2.3.1.4)
-    public int aPointer_to_THWID_list;					// (ARINC665-2 �2.2.3.1.4)     (ARINC665-3 �2.2.3.1.5)
-    public int aPointer_to_DF_list;						// (ARINC665-2 �2.2.3.1.5)     (ARINC665-3 �2.2.3.1.6)
-    public int aPointer_to_SF_list;						// (ARINC665-2 �2.2.3.1.6)     (ARINC665-3 �2.2.3.1.7)
-    public int aPointer_to_UDD;							// (ARINC665-2 �2.2.3.1.7)     (ARINC665-3 �2.2.3.1.8)
-    public int aPointer_to_LTD;							//                             (ARINC665-3 �2.2.3.1.9)
-    public final int kPointer_to_THWID_with_position_list = 0;	//                     (ARINC665-3 �2.2.3.1.10)
-    public int aPointer_to_LCV;							//                             (ARINC665-3 �2.2.3.1.11)
-    public char aLPN_length;							// (ARINC665-2 �2.2.3.1.9)     (ARINC665-3 �2.2.3.1.13)
-    public String aLoad_PN;								// (ARINC665-2 �2.2.3.1.10)    (ARINC665-3 �2.2.3.1.14)
-    public load_type aLoad_type;						//                             (ARINC665-3 �2.2.3.1.16-18)
-    public char aNumber_of_THWID;						// (ARINC665-2 �2.2.3.1.11)    (ARINC665-3 �2.2.3.1.20)
-    public String[] aTHWID_list;						// (ARINC665-2 �2.2.3.1.12-13) (ARINC665-3 �2.2.3.1.21-22)
-    public char aNumber_of_DF;							// (ARINC665-2 �2.2.3.1.14)    (ARINC665-3 �2.2.3.1.31)
-    public data_file aData_file;						// (ARINC665-2 �2.2.3.1.15-21) (ARINC665-3 �2.2.3.1.32-42)
-    public char aNumber_of_SF;							// (ARINC665-2 �2.2.3.1.23)    (ARINC665-3 �2.2.3.1.44)
-    public support_file aSupport_file;					// (ARINC665-2 �2.2.3.1.24-30) (ARINC665-3 �2.2.3.1.45-54)
-    public char[] aUser_defined_data;					// (ARINC665-2 �2.2.3.1.33)    (ARINC665-3 �2.2.3.1.57)
-    public char aCheck_value_length;					//                             (ARINC665-3 �2.2.3.1.59)
-    public char aCheck_value_type;						//                             (ARINC665-3 �2.2.3.1.60)
-    public byte[] aCheck_value;							//                             (ARINC665-3 �2.2.3.1.61)
-    public int aCRC16;									// (ARINC665-2 �2.2.3.1.34)    (ARINC665-3 �2.2.3.1.62)
+    public char aPartFlags;								//                           (ARINC665-3 �2.2.3.1.3)		(ARINC665-4 �2.2.3.1.3)
+    public int aPointer_to_LPN;							//                           (ARINC665-3 �2.2.3.1.4)		(ARINC665-4 �2.2.3.1.4)
+    public int aPointer_to_THWID_list;					// (ARINC665-2 �2.2.3.1.4)     (ARINC665-3 �2.2.3.1.5)		(ARINC665-4 �2.2.3.1.5)
+    public int aPointer_to_DF_list;						// (ARINC665-2 �2.2.3.1.5)     (ARINC665-3 �2.2.3.1.6)		(ARINC665-4 �2.2.3.1.6)
+    public int aPointer_to_SF_list;						// (ARINC665-2 �2.2.3.1.6)     (ARINC665-3 �2.2.3.1.7)		(ARINC665-4 �2.2.3.1.7)
+    public int aPointer_to_UDD;							// (ARINC665-2 �2.2.3.1.7)     (ARINC665-3 �2.2.3.1.8)		(ARINC665-4 �2.2.3.1.8)
+    public int aPointer_to_LTD;							//                            (ARINC665-3 �2.2.3.1.9)		(ARINC665-4 �2.2.3.1.9)
+    public final int kPointer_to_THWID_with_position_list = 0;	//                    (ARINC665-3 �2.2.3.1.10)	(ARINC665-4 �2.2.3.1.10)
+    public int aPointer_to_LCV;							//                            (ARINC665-3 �2.2.3.1.11)	(ARINC665-4 �2.2.3.1.11)
+    public char aLPN_length;							// (ARINC665-2 �2.2.3.1.9)     (ARINC665-3 �2.2.3.1.13)		(ARINC665-4 �2.2.3.1.13)
+    public String aLoad_PN;								// (ARINC665-2 �2.2.3.1.10)    (ARINC665-3 �2.2.3.1.14)		(ARINC665-4 �2.2.3.1.14)
+    public load_type aLoad_type;						//                            (ARINC665-3 �2.2.3.1.16-18)	(ARINC665-4 �2.2.3.1.16-18)
+    public char aNumber_of_THWID;						// (ARINC665-2 �2.2.3.1.11)    (ARINC665-3 �2.2.3.1.20)		(ARINC665-4 �2.2.3.1.20)
+    public String[] aTHWID_list;						// (ARINC665-2 �2.2.3.1.12-13) (ARINC665-3 �2.2.3.1.21-22)	(ARINC665-4 �2.2.3.1.21-22)
+    public char aNumber_of_DF;							// (ARINC665-2 �2.2.3.1.14)    (ARINC665-3 �2.2.3.1.31)		(ARINC665-4 �2.2.3.1.31)
+    public data_file aData_file;						// (ARINC665-2 �2.2.3.1.15-21) (ARINC665-3 �2.2.3.1.32-42)	(ARINC665-4 �2.2.3.1.32-42)
+    public char aNumber_of_SF;							// (ARINC665-2 �2.2.3.1.23)    (ARINC665-3 �2.2.3.1.44)		(ARINC665-4 �2.2.3.1.44)
+    public support_file aSupport_file;					// (ARINC665-2 �2.2.3.1.24-30) (ARINC665-3 �2.2.3.1.45-54)	(ARINC665-4 �2.2.3.1.45-54)
+    public char[] aUser_defined_data;					// (ARINC665-2 �2.2.3.1.33)    (ARINC665-3 �2.2.3.1.57)		(ARINC665-4 �2.2.3.1.57)
+    public char aCheck_value_length;					//                            (ARINC665-3 �2.2.3.1.59)	(ARINC665-4 �2.2.3.1.59)
+    public char aCheck_value_type;						//                            (ARINC665-3 �2.2.3.1.60)	(ARINC665-4 �2.2.3.1.60)
+    public byte[] aCheck_value;							//                            (ARINC665-3 �2.2.3.1.61)	(ARINC665-4 �2.2.3.1.61)
+    public int aCRC16;									// (ARINC665-2 �2.2.3.1.34)    (ARINC665-3 �2.2.3.1.62)		(ARINC665-4 �2.2.3.1.62)
     public String aHexa_dump;
     /**************************************************************************
      ** Constructor : header_file                                            **
@@ -89,7 +89,7 @@ public class header_file {
             aLength++;
         }
         else {
-            // Set the Part Flags field (ARINC665-3 �2.2.3.1.3)
+            // Set the Part Flags field (ARINC665-3 �2.2.3.1.3) (ARINC665-4 �2.2.3.1.3)
             aPartFlags = 0;
             // Increase the length (size of Part Flags field)
             aLength++;
@@ -114,16 +114,17 @@ public class header_file {
         aPointer_to_UDD = 0;
         // Increase the length (size of Pointer to User Define Data field)
         aLength += 2;
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
-        	// Initialize the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9)
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	// Initialize the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9) (ARINC665-4 �2.2.3.1.9)
         	aPointer_to_LTD = 0;
             // Increase the length (size of Pointer to Load Type Description field)
             aLength += 2;
-        	// Initialize the Pointer to THWID with positions field (ARINC665-3 �2.2.3.1.10)
+        	// Initialize the Pointer to THWID with positions field (ARINC665-3 �2.2.3.1.10) (ARINC665-4 �2.2.3.1.10)
         	// kPointer_to_THWID_with_position_list = 0;
             // Increase the length (size of Pointer to THWID with positions field)
             aLength += 2;
-        	// Initialize the Pointer to Load Check Value field (ARINC665-3 �2.2.3.1.11)
+        	// Initialize the Pointer to Load Check Value field (ARINC665-3 �2.2.3.1.11) (ARINC665-4 �2.2.3.1.11)
         	aPointer_to_LCV = 0;
             // Increase the length (size of Pointer to Load Check Value field)
             aLength += 2;
@@ -141,9 +142,10 @@ public class header_file {
         // Increase the length (size of Load PN field)
         aLength += (1 + a_load_PN.length()) / 2;
         // Set the Load Type Description fields if necessary
-        if ((a_norm_version == ARINC_norm_version.ARINC665_3) &&
+        if (((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	 (a_norm_version == ARINC_norm_version.ARINC665_4)) &&
         	(a_load_type_description != null)) {
-        	// Set the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9)
+        	// Set the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9) (ARINC665-4 �2.2.3.1.9)
         	aPointer_to_LTD = aLength;
             // Increase the length (size of Load Type Description Length field)
         	aLength++;
@@ -153,7 +155,7 @@ public class header_file {
         	aLength += 1 + ((1 + aLoad_type.aDescription.length()) / 2);
         }
         else {
-        	// Initialize the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9)
+        	// Initialize the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9) (ARINC665-4 �2.2.3.1.9)
         	aPointer_to_LTD = 0;
         }
         // Set the Pointer to Load Part Number field
@@ -195,7 +197,8 @@ public class header_file {
                        ((1 + aData_file.aPN.length()) / 2) +
                        2 +
                        1;
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	switch(aData_file.aCheck_value_type) {
             		case 4 :
             		case 5 :
@@ -214,7 +217,7 @@ public class header_file {
         	aSupport_file = null;
             // Set the Number of Supplier Files field
             aNumber_of_SF = 0;
-            // No change to the length as requested by the Implementation A of M.3.4 (ARINC665-4)
+            // No change to the length as requested by the Implementation A of M.3.4 (ARINC665-4) (ARINC665-5)
         }
         else {
             // Set the Pointer to Support File list field
@@ -243,7 +246,8 @@ public class header_file {
                            ((1 + aLoad_PN.length()) / 2) +
                            2 +
                            1;
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	switch(aSupport_file.aCheck_value_type) {
                 		case 4 :
                 		case 5 :
@@ -279,7 +283,8 @@ public class header_file {
         // Set the Pointer to Load Check Value field
         aPointer_to_LCV = aLength;
         // Add the Load Check Value fields if requested
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             // Increase the length (size of Load Check Value Length field)
             aLength++;
         	switch(a_load_integrity_check) {
@@ -338,7 +343,8 @@ public class header_file {
         size += file.WriteInt(lOut_file, aPointer_to_DF_list);
         size += file.WriteInt(lOut_file, aPointer_to_SF_list);
         size += file.WriteInt(lOut_file, aPointer_to_UDD);
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	size += file.WriteInt(lOut_file, aPointer_to_LTD);
         	size += file.WriteInt(lOut_file, kPointer_to_THWID_with_position_list);
         	size += file.WriteInt(lOut_file, aPointer_to_LCV);
@@ -349,7 +355,8 @@ public class header_file {
         size += file.WriteChar(lOut_file, aLPN_length);
         size += file.WriteString(lOut_file, aLoad_PN);
         // Write Load Type Description if requested
-        if ((a_norm_version == ARINC_norm_version.ARINC665_3) &&
+        if (((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	 (a_norm_version == ARINC_norm_version.ARINC665_4)) &&
             (aPointer_to_LTD != 0)) {
         	size += file.WriteChar(lOut_file, (char) aLoad_type.aDescription.length());
         	size += file.WriteString(lOut_file, aLoad_type.aDescription);
@@ -378,7 +385,8 @@ public class header_file {
             //  1. split size is even
             //  2. for the last data file, a padding character is added when calling constructor of data file class
             size += file.WriteChar(lOut_file, (char) aData_file.aCRC16[i - 1]);
-            if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+            if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	size += file.WriteInt(lOut_file, 0);
             	size += file.WriteInt(lOut_file, aData_file.aLength_in_bytes[i - 1]);
             	size += file.WriteChar(lOut_file, aData_file.aCheck_value_length);
@@ -407,7 +415,8 @@ public class header_file {
                 size += file.WriteString(lOut_file, aSupport_file.aPN);
                 size += file.WriteInt(lOut_file, aSupport_file.aLength[i - 1]);
                 size += file.WriteChar(lOut_file, (char) aSupport_file.aCRC16[i - 1]);
-                if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+                if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	size += file.WriteChar(lOut_file, aSupport_file.aCheck_value_length);
                 	if (aSupport_file.aCheck_value_type != 0) {
                 		size += file.WriteChar(lOut_file, aSupport_file.aCheck_value_type);
@@ -433,7 +442,8 @@ public class header_file {
         else {
         }
         // Write Load Check Value fields if requested
-        if (a_norm_version == ARINC_norm_version.ARINC665_3) {
+        if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
+        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
         	// Write the Load Check Value length field
             size += file.WriteChar(lOut_file, aCheck_value_length);
             // TODO Impl�menter le load check value

@@ -103,6 +103,7 @@ public class LSPB extends JFrame {
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_1;
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_2;
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_3;
+	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_4;
 	private JSplitPane pSplitPane;
 	private JTabbedPane pJTabbedPane;
 	private JTree pJTreeConfiguration;
@@ -344,7 +345,8 @@ public class LSPB extends JFrame {
 			}
 			lSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aData_file.aCRC16[i]));
 			lSubNode.add(lSubSubNode);
-			if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
 					case 4 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
@@ -385,7 +387,8 @@ public class LSPB extends JFrame {
 		lNode.add(lSubNode);
 		lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to user defined data = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_UDD * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_UDD), true);
 		lNode.add(lSubNode);
-		if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to load type description = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_LTD * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_LTD), true);
 			lNode.add(lSubNode);
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to number of THWID with positions = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.kPointer_to_THWID_with_position_list * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.kPointer_to_THWID_with_position_list), true);
@@ -399,7 +402,8 @@ public class LSPB extends JFrame {
 		lNode.add(lSubNode);
 		lSubNode = new DefaultMutableTreeNode(String.format("Load P/N = %s", LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_PN), true);
 		lNode.add(lSubNode);
-		if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Load type description length = %d bytes (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription.length(), LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription.length()), true);
 			lNode.add(lSubNode);
 			lSubNode = new DefaultMutableTreeNode(String.format("Load type description = %s", LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription), true);
@@ -430,7 +434,8 @@ public class LSPB extends JFrame {
 			lSubSubNode.add(lSubSubSubNode);
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aData_file.aCRC16[i]));
 			lSubSubNode.add(lSubSubSubNode);
-			if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
@@ -467,7 +472,8 @@ public class LSPB extends JFrame {
 			lSubSubNode.add(lSubSubSubNode);
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aSupport_file.aCRC16[i]));
 			lSubSubNode.add(lSubSubSubNode);
-			if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_type) {
@@ -572,7 +578,8 @@ public class LSPB extends JFrame {
 		lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to number of media set files = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_File_List * 2, LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_File_List), true);
 		lNode.add(lSubNode);
 		lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to user defined data = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_UDD * 2, LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_UDD), true);
-		if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to FILES.LUM check value length = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_FCV * 2, LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_FCV), true);
 		}
 		else {
@@ -601,14 +608,16 @@ public class LSPB extends JFrame {
 			lSubSubNode.add(lSubSubSubNode);
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aFile_CRC[i]));
 			lSubSubNode.add(lSubSubSubNode);
-			if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+		    	(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				lSubSubSubNode = new DefaultMutableTreeNode("File check value length = 0 word");
 				lSubSubNode.add(lSubSubSubNode);
 			}
 			else {
 			}
 		}
-		if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length), true);
 			lNode.add(lSubNode);
 			if (aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length != 0) {
@@ -676,18 +685,7 @@ public class LSPB extends JFrame {
 				// Calculate CRC of load P/N
 				lCC = Integer.toHexString(integrity_check.CalculateCRC8(pXML_configuration_file.aMMM + pXML_configuration_file.aLoad_PN)).toUpperCase();
 				// Build load files
-				switch(pXML_configuration_file.aNorm_version) {
-				case 1 :
-					aARINC_norm_version = ARINC_norm_version.ARINC665_1;
-					break;
-				default :
-				case 2 :
-					aARINC_norm_version = ARINC_norm_version.ARINC665_2;
-					break;
-				case 3 :
-					aARINC_norm_version = ARINC_norm_version.ARINC665_3;
-					break;
-				}
+				aARINC_norm_version = ARINC_norm_version.fromValue(pXML_configuration_file.aNorm_version);
 				BuildLoad(lCC, aARINC_norm_version);
 			}
 			// ELSE
@@ -814,6 +812,7 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_1.setSelected(true);
 							pJCheckBoxMenuItemARINC665_2.setSelected(false);
 							pJCheckBoxMenuItemARINC665_3.setSelected(false);
+							pJCheckBoxMenuItemARINC665_4.setSelected(false);
 							break;
 						default :
 						case 2 :
@@ -821,12 +820,21 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_1.setSelected(false);
 							pJCheckBoxMenuItemARINC665_2.setSelected(true);
 							pJCheckBoxMenuItemARINC665_3.setSelected(false);
+							pJCheckBoxMenuItemARINC665_4.setSelected(false);
 							break;
 						case 3 :
 							aARINC_norm_version = ARINC_norm_version.ARINC665_3;
 							pJCheckBoxMenuItemARINC665_1.setSelected(false);
 							pJCheckBoxMenuItemARINC665_2.setSelected(false);
 							pJCheckBoxMenuItemARINC665_3.setSelected(true);
+							pJCheckBoxMenuItemARINC665_4.setSelected(false);
+							break;
+						case 4 :
+							aARINC_norm_version = ARINC_norm_version.ARINC665_4;
+							pJCheckBoxMenuItemARINC665_1.setSelected(false);
+							pJCheckBoxMenuItemARINC665_2.setSelected(false);
+							pJCheckBoxMenuItemARINC665_3.setSelected(false);
+							pJCheckBoxMenuItemARINC665_4.setSelected(true);
 							break;
 						}
 						pJTreeConfiguration = new JTree();
@@ -849,7 +857,8 @@ public class LSPB extends JFrame {
 						pRootNodeConfiguration.add(lNode);
 						lSubNode = new DefaultMutableTreeNode("Part Number : " + pXML_configuration_file.aLoad_PN, true);
 						lNode.add(lSubNode);
-						if (aARINC_norm_version == ARINC_norm_version.ARINC665_3) {
+						if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
+							(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 							if (pXML_configuration_file.aLoad_type_description != null) {
 								lSubNode = new DefaultMutableTreeNode("Load type description : " + pXML_configuration_file.aLoad_type_description, true);
 								lNode.add(lSubNode);
@@ -986,6 +995,7 @@ public class LSPB extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				pJCheckBoxMenuItemARINC665_2.setSelected(false);
 				pJCheckBoxMenuItemARINC665_3.setSelected(false);
+				pJCheckBoxMenuItemARINC665_4.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_1;
 			}
 		};
@@ -993,6 +1003,7 @@ public class LSPB extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				pJCheckBoxMenuItemARINC665_1.setSelected(false);
 				pJCheckBoxMenuItemARINC665_3.setSelected(false);
+				pJCheckBoxMenuItemARINC665_4.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_2;
 			}
 		};
@@ -1000,7 +1011,16 @@ public class LSPB extends JFrame {
 			public void actionPerformed(ActionEvent event) {
 				pJCheckBoxMenuItemARINC665_1.setSelected(false);
 				pJCheckBoxMenuItemARINC665_2.setSelected(false);
+				pJCheckBoxMenuItemARINC665_4.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_3;
+			}
+		};
+		ActionListener actionARINC665_4 = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				pJCheckBoxMenuItemARINC665_1.setSelected(false);
+				pJCheckBoxMenuItemARINC665_2.setSelected(false);
+				pJCheckBoxMenuItemARINC665_3.setSelected(false);
+				aARINC_norm_version = ARINC_norm_version.ARINC665_4;
 			}
 		};
 		ActionListener actionGenerate = new ActionListener() {
@@ -1041,7 +1061,7 @@ public class LSPB extends JFrame {
 				final Shell lShell = new Shell(lDisplay);
 				MessageBox lMessageBox = new MessageBox(lShell, SWT.ICON_INFORMATION | SWT.OK);
 				lMessageBox.setMessage("Loadable Software Part Builder (64 bits)\n" +
-						"© Assistance Informatique Toulouse 2026\n\n" +
+						"ï¿½ Assistance Informatique Toulouse 2026\n\n" +
 						"Written in Java under Eclipse with SWT\n" +
 						"Start with Eclipse 3.5 Galileo + SWT 3.6.1\n" +
 						"Migration to Eclipse 3.6 Indigo + SWT 3.7.1\n" +
@@ -1064,7 +1084,7 @@ public class LSPB extends JFrame {
 				final Display lDisplay = new Display();
 				final Shell lShell = new Shell(lDisplay);
 				MessageBox lMessageBox = new MessageBox(lShell, SWT.ICON_INFORMATION | SWT.OK);
-				lMessageBox.setMessage("For limitations, see §6 of user's manual\n");
+				lMessageBox.setMessage("For limitations, see ï¿½6 of user's manual\n");
 				lMessageBox.setText(kTitle);
 				lMessageBox.open();
 				lDisplay.dispose();
@@ -1124,6 +1144,14 @@ public class LSPB extends JFrame {
 		pJCheckBoxMenuItemARINC665_3.addActionListener(actionARINC665_3);
 		lJMenuNorm.add(pJCheckBoxMenuItemARINC665_3);
 
+		pJCheckBoxMenuItemARINC665_4 = new JCheckBoxMenuItem("ARINC665-4");
+		pJCheckBoxMenuItemARINC665_4.setEnabled(true);
+		pJCheckBoxMenuItemARINC665_4.setMnemonic('4');
+		pJCheckBoxMenuItemARINC665_4.setSelected(false);
+		pJCheckBoxMenuItemARINC665_4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, 0));
+		pJCheckBoxMenuItemARINC665_4.addActionListener(actionARINC665_4);
+		lJMenuNorm.add(pJCheckBoxMenuItemARINC665_4);
+
 		pJMenuItemGenerate = new JMenuItem("Generate");
 		pJMenuItemGenerate.setMaximumSize(new Dimension(65, 50));
 		pJMenuItemGenerate.setEnabled(false);
@@ -1146,7 +1174,7 @@ public class LSPB extends JFrame {
 		lJMenuHelp.add(lJMenuItemLimitation);
 		lJMenuItemLimitation.addActionListener(actionLimitation);
 
-		// TODO Rendre la JSplitPane invisible jusqu'à l'ouverture du fichier xml
+		// TODO Rendre la JSplitPane invisible jusqu'ï¿½ l'ouverture du fichier xml
 		pSplitPane = new JSplitPane();
 		//pSplitPane.setVisible(false);
 

@@ -11,30 +11,30 @@ import lspb.file;
  **                                                                      **
  **************************************************************************/
 public class list_of_batch_file {
-	// (ARINC665-2 §3.2.3.3) (ARINC665-3 §3.2.3.3)
+	// (ARINC665-2 ï¿½3.3.2.3.3) (ARINC665-3 ï¿½33.2.3.3) (ARINC665-4 ï¿½33.2.3.3)
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
     private static final String kFile_extension = "LUM";
     public String pName;
-    public int aLength;									// (ARINC665-2 §3.2.3.3.1)  (ARINC665-3 §3.2.3.3.1)
-    public char aVersion;								// (ARINC665-2 §3.2.3.3.2)  (ARINC665-3 §3.2.3.3.2)
-    public final char kSpare = 0;						// (ARINC665-2 §3.2.3.3.3)  (ARINC665-3 §3.2.3.3.3)
-    public int aPointer_to_Media_Information;			// (ARINC665-2 §3.2.3.3.4)  (ARINC665-3 §3.2.3.3.4)
-    public int aPointer_to_Batch_List;					// (ARINC665-2 §3.2.3.3.5)  (ARINC665-3 §3.2.3.3.5)
-    public int aPointer_to_UDD;							// (ARINC665-2 §3.2.3.3.6)  (ARINC665-3 §3.2.3.3.6)
-    public char aMSPN_length;							// (ARINC665-2 §3.2.3.3.8)  (ARINC665-3 §3.2.3.3.8)
-    public String aMSPN;								// (ARINC665-2 §3.2.3.3.9)  (ARINC665-3 §3.2.3.3.9)
-    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 §3.2.3.3.10) (ARINC665-3 §3.2.3.3.10)
-    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 §3.2.3.3.11) (ARINC665-3 §3.2.3.3.11)
-    public final char aNumber_of_batches = 1;			// (ARINC665-2 §3.2.3.3.12) (ARINC665-3 §3.2.3.3.12)
-    public char[] aBatch_pointer;						// (ARINC665-2 §3.2.3.3.13) (ARINC665-3 §3.2.3.3.13)
-    public char[] aBatch_PN_length;						// (ARINC665-2 §3.2.3.3.14) (ARINC665-3 §3.2.3.3.14)
-    public String[] aBatch_PN;							// (ARINC665-2 §3.2.3.3.15) (ARINC665-3 §3.2.3.3.15)
-    public char[] aBatch_FN_length;						// (ARINC665-2 §3.2.3.3.16) (ARINC665-3 §3.2.3.3.16)
-    public String[] aBatch_FN;							// (ARINC665-2 §3.2.3.3.17) (ARINC665-3 §3.2.3.3.17)
-    public final char kMember_sequence_number = 1;		// (ARINC665-2 §3.2.3.3.18) (ARINC665-3 §3.2.3.3.18)
-    public int aCRC16;									// (ARINC665-2 §3.2.3.3.22) (ARINC665-3 §3.2.3.3.22)
+    public int aLength;									// (ARINC665-2 ï¿½3.2.3.3.1)  (ARINC665-3 ï¿½3.3.2.3.3.1)  (ARINC665-4 ï¿½3.3.2.3.3.1)
+    public char aVersion;								// (ARINC665-2 ï¿½3.2.3.3.2)  (ARINC665-3 ï¿½3.3.2.3.3.2)  (ARINC665-4 ï¿½3.3.2.3.3.2)
+    public final char kSpare = 0;						// (ARINC665-2 ï¿½3.2.3.3.3)  (ARINC665-3 ï¿½3.3.2.3.3.3)  (ARINC665-4 ï¿½3.3.2.3.3.3)
+    public int aPointer_to_Media_Information;			// (ARINC665-2 ï¿½3.2.3.3.4)  (ARINC665-3 ï¿½3.3.2.3.3.4)  (ARINC665-4 ï¿½3.3.2.3.3.4)
+    public int aPointer_to_Batch_List;					// (ARINC665-2 ï¿½3.2.3.3.5)  (ARINC665-3 ï¿½3.3.2.3.3.5)  (ARINC665-4 ï¿½3.3.2.3.3.5)
+    public int aPointer_to_UDD;							// (ARINC665-2 ï¿½3.2.3.3.6)  (ARINC665-3 ï¿½3.3.2.3.3.6)  (ARINC665-4 ï¿½3.3.2.3.3.6)
+    public char aMSPN_length;							// (ARINC665-2 ï¿½3.2.3.3.8)  (ARINC665-3 ï¿½3.3.2.3.3.8)  (ARINC665-4 ï¿½3.3.2.3.3.8)
+    public String aMSPN;								// (ARINC665-2 ï¿½3.2.3.3.9)  (ARINC665-3 ï¿½3.3.2.3.3.9)  (ARINC665-4 ï¿½3.3.2.3.3.9)
+    public final byte aMedia_sequence_number = 1;		// (ARINC665-2 ï¿½3.2.3.3.10) (ARINC665-3 ï¿½3.3.2.3.3.10) (ARINC665-4 ï¿½3.3.2.3.3.10)
+    public final byte aNumber_of_media_set_member = 1;	// (ARINC665-2 ï¿½3.2.3.3.11) (ARINC665-3 ï¿½3.3.2.3.3.11) (ARINC665-4 ï¿½3.3.2.3.3.11)
+    public final char aNumber_of_batches = 1;			// (ARINC665-2 ï¿½3.2.3.3.12) (ARINC665-3 ï¿½3.3.2.3.3.12) (ARINC665-4 ï¿½3.3.2.3.3.12)
+    public char[] aBatch_pointer;						// (ARINC665-2 ï¿½3.2.3.3.13) (ARINC665-3 ï¿½3.3.2.3.3.13) (ARINC665-4 ï¿½3.3.2.3.3.13)
+    public char[] aBatch_PN_length;						// (ARINC665-2 ï¿½3.2.3.3.14) (ARINC665-3 ï¿½3.3.2.3.3.14) (ARINC665-4 ï¿½3.3.2.3.3.14)
+    public String[] aBatch_PN;							// (ARINC665-2 ï¿½3.2.3.3.15) (ARINC665-3 ï¿½3.3.2.3.3.15) (ARINC665-4 ï¿½3.3.2.3.3.15)
+    public char[] aBatch_FN_length;						// (ARINC665-2 ï¿½3.2.3.3.16) (ARINC665-3 ï¿½3.3.2.3.3.16) (ARINC665-4 ï¿½3.3.2.3.3.16)
+    public String[] aBatch_FN;							// (ARINC665-2 ï¿½3.2.3.3.17) (ARINC665-3 ï¿½3.3.2.3.3.17) (ARINC665-4 ï¿½3.3.2.3.3.17)
+    public final char kMember_sequence_number = 1;		// (ARINC665-2 ï¿½3.2.3.3.18) (ARINC665-3 ï¿½3.3.2.3.3.18) (ARINC665-4 ï¿½3.3.2.3.3.18)
+    public int aCRC16;									// (ARINC665-2 ï¿½3.2.3.3.22) (ARINC665-3 ï¿½3.3.2.3.3.22) (ARINC665-4 ï¿½3.3.2.3.3.22)
     /**************************************************************************
      ** Constructor : list_of_batch_file                                     **
      **************************************************************************/
