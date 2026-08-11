@@ -200,8 +200,8 @@ public class header_file {
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
             	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	switch(aData_file.aCheck_value_type) {
-            		case 4 :
-            		case 5 :
+            		case MD5 :
+            		case SHA_1 :
             			aLength += 4 + (aData_file.aCheck_value_length / 2);
             			break;
             		default : 
@@ -390,8 +390,8 @@ public class header_file {
             	size += file.WriteInt(lOut_file, 0);
             	size += file.WriteInt(lOut_file, aData_file.aLength_in_bytes[i - 1]);
             	size += file.WriteChar(lOut_file, aData_file.aCheck_value_length);
-            	if (aData_file.aCheck_value_type != 0) {
-            		size += file.WriteChar(lOut_file, aData_file.aCheck_value_type);
+            	if (aData_file.aCheck_value_type != check_value_type.NOT_USED) {
+            		size += file.WriteChar(lOut_file, aData_file.aCheck_value_type.getValue());
                 	for(j=1;j <= aData_file.aCheck_value[i - 1].length;j++) {
                     	size += file.WriteByte(lOut_file, aData_file.aCheck_value[i - 1][j - 1]);
                 	}

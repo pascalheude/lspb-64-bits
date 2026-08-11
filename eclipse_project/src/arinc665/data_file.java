@@ -24,7 +24,7 @@ public class data_file {
     public int[] aLength_in_bytes;						// (ARINC665-2 �2.2.3.1.20)    (ARINC665-3 �2.2.3.1.37,39)	(ARINC665-4 �2.2.3.1.37,39)
     public int[] aCRC16;								// (ARINC665-2 �2.2.3.1.21)    (ARINC665-3 �2.2.3.1.38)		(ARINC665-4 �2.2.3.1.38)
     public char aCheck_value_length;					//                            (ARINC665-3 �2.2.3.1.40)	(ARINC665-4 �2.2.3.1.40)
-    public char aCheck_value_type;						//                            (ARINC665-3 �2.2.3.1.41)	(ARINC665-4 �2.2.3.1.41)
+    public check_value_type aCheck_value_type;			//                            (ARINC665-3 �2.2.3.1.41)	(ARINC665-4 �2.2.3.1.41)
     public byte[][] aCheck_value;						//                            (ARINC665-3 �2.2.3.1.42)	(ARINC665-4 �2.2.3.1.42)
     public String[] aCheck_value_string;				//                            (ARINC665-3 �2.2.3.1.42)	(ARINC665-4 �2.2.3.1.42)
     public boolean[] aPadding;
@@ -68,7 +68,7 @@ public class data_file {
         aLength_in_bytes = new int[lNumber_of_file];
         aPadding = new boolean[lNumber_of_file];
     	aCheck_value_length = 0;
-    	aCheck_value_type = 0;
+    	aCheck_value_type = check_value_type.NOT_USED;
     	aCheck_value = null;
     	aCheck_value_string = null;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
@@ -76,13 +76,13 @@ public class data_file {
             switch(an_integrity_check) {
             	case 4 :
                 	aCheck_value_length = 20;
-                	aCheck_value_type = 4;
+                	aCheck_value_type = check_value_type.MD5;
                 	aCheck_value = new byte[lNumber_of_file][16];
                 	aCheck_value_string = new String[lNumber_of_file];
             	break;
             	case 5 :
                 	aCheck_value_length = 24;
-                	aCheck_value_type = 5;
+                	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[lNumber_of_file][20];
                 	aCheck_value_string = new String[lNumber_of_file];
             	break;
@@ -107,8 +107,8 @@ public class data_file {
                 	aPointer[i - 1] += 4 +
                 			           1;
                 	switch(aCheck_value_type) {
-                		case 4 :
-                		case 5 :
+                		case MD5 :
+                		case SHA_1 :
                 			aPointer[i - 1] += (aCheck_value_length / 2) - 1;
                 			break;
                 		default : ;
@@ -155,7 +155,7 @@ public class data_file {
              if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
              	 (a_norm_version == ARINC_norm_version.ARINC665_4)) {
                  switch(aCheck_value_type) {
-                 	case 4 :
+                 	case MD5 :
                         try {
          					aCheck_value[i - 1] = integrity_check.CalculateMD5(lBytes);
          					aCheck_value_string[i - 1] = "";
@@ -168,7 +168,7 @@ public class data_file {
                         		System.out.printf("*** Information *** MD5 algorihtm exception for data file\n");
                          }
                          break;
-                 	case 5 :
+                 	case SHA_1 :
                         try {
          					aCheck_value[i - 1] = integrity_check.CalculateSHA1(lBytes);
          					aCheck_value_string[i - 1] = "";

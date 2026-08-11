@@ -348,11 +348,11 @@ public class LSPB extends JFrame {
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
 				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
-					case 4 :
+					case MD5 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 						lSubNode.add(lSubSubNode);
 						break;
-					case 5 :
+					case SHA_1 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 						lSubNode.add(lSubSubNode);
 						break;
@@ -439,13 +439,13 @@ public class LSPB extends JFrame {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
-				case 4 :
+				case MD5 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
-				case 5 :
+				case SHA_1 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
@@ -1105,13 +1105,13 @@ public class LSPB extends JFrame {
 
 		JMenuItem lJMenuItemOpen = new JMenuItem("Open ...");
 		lJMenuItemOpen.setMnemonic('O');
-		lJMenuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+		lJMenuItemOpen.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
 		lJMenuFile.add(lJMenuItemOpen);
 		lJMenuItemOpen.addActionListener(actionOpen);
 
 		JMenuItem lJMenuItemQuit = new JMenuItem("Quit");
 		lJMenuItemQuit.setMnemonic('Q');
-		lJMenuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+		lJMenuItemQuit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
 		lJMenuFile.add(lJMenuItemQuit);
 		lJMenuItemQuit.addActionListener(actionQuit);
 
