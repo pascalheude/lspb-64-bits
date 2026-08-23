@@ -22,7 +22,7 @@ public class support_file {
     public int[] aLength;								// (ARINC665-2 �2.2.3.1.XX)    (ARINC665-3 �2.2.2.3.1.50)    (ARINC665-4 �2.2.2.3.1.50)
     public int[] aCRC16;								// (ARINC665-2 �2.2.3.1.XX)    (ARINC665-3 �2.2.2.3.1.51)    (ARINC665-4 �2.2.2.3.1.51)
     public char aCheck_value_length;					//                            (ARINC665-3 �2.2.2.3.1.52)   (ARINC665-4 �2.2.2.3.1.52)
-    public char aCheck_value_type;						//                            (ARINC665-3 �2.2.2.3.1.53)   (ARINC665-4 �2.2.2.3.1.53)
+    public check_value_type aCheck_value_type;			//                            (ARINC665-3 �2.2.2.3.1.53)   (ARINC665-4 �2.2.2.3.1.53)
     public byte[][] aCheck_value;						//                            (ARINC665-3 �2.2.2.3.1.54)   (ARINC665-4 �2.2.2.3.1.54)
     public String[] aCheck_value_string;				//                            (ARINC665-3 �2.2.2.3.1.54)   (ARINC665-4 �2.2.2.3.1.54)
     /**************************************************************************
@@ -35,6 +35,8 @@ public class support_file {
                         String a_sub_directory) throws IOException, ARINC665Exception {
 		int i;
 		int j;
+		int k;
+		long lCRC64;
         byte[] lBytes;
         File lFile;
         RandomAccessFile lRAFile;
@@ -47,22 +49,28 @@ public class support_file {
         aPN = a_aPN;
         aCRC16 = new int[a_support_file_list.length];
     	aCheck_value_length = 0;
-    	aCheck_value_type = 0;
+    	aCheck_value_type = check_value_type.NOT_USED;
     	aCheck_value = null;
     	aCheck_value_string = null;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
         	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             switch(an_integrity_check) {
             	case 4 :
-                	aCheck_value_length = 20;
-                	aCheck_value_type = 4;
+                	aCheck_value_length = 16;
+                	aCheck_value_type = check_value_type.MD5;
                 	aCheck_value = new byte[a_support_file_list.length][16];
                 	aCheck_value_string = new String[a_support_file_list.length];
             	break;
             	case 5 :
-                	aCheck_value_length = 24;
-                	aCheck_value_type = 5;
+                	aCheck_value_length = 20;
+                	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[a_support_file_list.length][20];
+                	aCheck_value_string = new String[a_support_file_list.length];
+            	break;
+            	case 8 :
+                	aCheck_value_length = 8;
+                	aCheck_value_type = check_value_type.CRC64;
+                	aCheck_value = new byte[a_support_file_list.length][8];
                 	aCheck_value_string = new String[a_support_file_list.length];
             	break;
             	default : ;
@@ -94,8 +102,8 @@ public class support_file {
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
             	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 switch(aCheck_value_type) {
-                	case 4 :
-                       try {
+                	case MD5 :
+                        try {
         					aCheck_value[i - 1] = integrity_check.CalculateMD5(lBytes);
          					aCheck_value_string[i - 1] = "";
          					for(j=0; j < aCheck_value[i - 1].length;j++) {
@@ -104,22 +112,31 @@ public class support_file {
         					System.out.printf("*** Information *** MD5 of file %s : %s\n", a_support_file_list[i - 1], aCheck_value_string[i - 1]);
                         } catch (NoSuchAlgorithmException e) {
                        		aCheck_value_length = 0;
-                       		System.out.printf("*** Information *** MD5 algorihtm exception for data file\n");
+                       		System.out.printf("*** Information *** MD5 algorihtm exception for support file\n");
                         }
                         break;
-                	case 5 :
-                       try {
+                	case SHA_1 :
+                        try {
         					aCheck_value[i - 1] = integrity_check.CalculateSHA1(lBytes);
          					aCheck_value_string[i - 1] = "";
-         					for(j=0; j < aCheck_value[i - 1].length;j++) {
+          					for(j=0; j < aCheck_value[i - 1].length;j++) {
          						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
          					}
         					System.out.printf("*** Information *** SHA-1 of file %s : %s\n", a_support_file_list[i - 1], aCheck_value_string[i - 1]);
         				} catch (NoSuchAlgorithmException e) {
         					aCheck_value_length = 0;
-        					System.out.printf("*** Information *** SHA-1 algorihtm exception for data file\n");
+        					System.out.printf("*** Information *** SHA-1 algorihtm exception for support file\n");
         				}
-                       break;
+                        break;
+                	case CRC64 :
+     					lCRC64 = integrity_check.CalculateCRC64(lBytes, lBytes.length);
+      					aCheck_value_string[i - 1] = "";
+      					for(j=0, k=aCheck_value[i - 1].length - 1; j < aCheck_value[i - 1].length;j++, k--) {
+      						aCheck_value[i - 1][j] = (byte) ((lCRC64 >> (k * 8)) & 0xFF);
+      						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
+      					}
+     					System.out.printf("*** Information *** CRC64 of file %s : 0x%s\n", a_support_file_list[i - 1], aCheck_value_string[i - 1]);
+                        break;
                 	default : ;
                 }
             }
@@ -133,8 +150,9 @@ public class support_file {
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
                 	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	switch(aCheck_value_type) {
-                		case 4 :
-                		case 5 :
+                		case MD5 :
+                		case SHA_1 :
+                		case CRC64 :
                 			aPointer[i - 1] += (aCheck_value_length / 2);
                 			break;
                 		default : ;

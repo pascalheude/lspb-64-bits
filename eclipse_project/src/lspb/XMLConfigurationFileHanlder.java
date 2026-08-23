@@ -72,7 +72,10 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
 	 ** Private method : DisplayUsage                                        **
 	 **************************************************************************/
 	private static char GetIntegrityCheckValue(String a_string) {
-		if (a_string.equals("MD5")) {
+		if (a_string.equals("CRC64")) {
+			return(8);
+		}
+		else if (a_string.equals("MD5")) {
             return(4);
         }
         else if (a_string.equals("SHA-1")) {

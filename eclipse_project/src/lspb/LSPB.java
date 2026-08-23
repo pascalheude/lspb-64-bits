@@ -67,6 +67,7 @@ public class LSPB extends JFrame {
      **************************************************************************/
 	private class MyTreeCellRenderer extends DefaultTreeCellRenderer
 	{
+		private static final long serialVersionUID = 1L;
 		@Override public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus)
 		{
 			super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
@@ -83,6 +84,7 @@ public class LSPB extends JFrame {
      ** Private class StatusBar                                              **
      **************************************************************************/
 	private class StatusBar extends JLabel {
+		private static final long serialVersionUID = 1L;
 		public StatusBar() {
 			super();
 		}
@@ -118,7 +120,7 @@ public class LSPB extends JFrame {
 	public static ARINC665 aARINC665;
 	private static ARINC_norm_version aARINC_norm_version;
 	private static final int kSIS_system_zone_size = 0x3B0;
-	private static final String kTitle = "LSPB v3.6 beta";
+	private static final String kTitle = "LSPB v4.0 beta";
 	private final String kARINC_logo = "/images/arinc_logo.jpg";
 	/**************************************************************************
 	 ** Private method : DisplayUsage                                        **
@@ -356,6 +358,10 @@ public class LSPB extends JFrame {
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 						lSubNode.add(lSubSubNode);
 						break;
+					case CRC64 :
+						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : CRC64 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubNode.add(lSubSubNode);
+						break;
 					default : ;
 				}
 			}
@@ -451,6 +457,12 @@ public class LSPB extends JFrame {
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
+				case CRC64 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
 					default : ;
 				}
 			}
@@ -474,19 +486,25 @@ public class LSPB extends JFrame {
 			lSubSubNode.add(lSubSubSubNode);
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
 				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
-				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
+				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_type) {
-				case 4 :
+				case MD5 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
-				case 5 :
+				case SHA_1 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
+				case CRC64 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
 					default : ;
@@ -912,6 +930,14 @@ public class LSPB extends JFrame {
 							lNode.add(lSubNode);
 							if (pXML_configuration_file.aSupport_file_integrity_check == 4) {
 								lSubSubNode = new DefaultMutableTreeNode("Integrity check : MD5\n", true);
+								lSubNode.add(lSubSubNode);
+							}
+							else if (pXML_configuration_file.aSupport_file_integrity_check == 5) {
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-1\n", true);
+								lSubNode.add(lSubSubNode);
+							}
+							else if (pXML_configuration_file.aSupport_file_integrity_check == 8) {
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC64\n", true);
 								lSubNode.add(lSubSubNode);
 							}
 							else {

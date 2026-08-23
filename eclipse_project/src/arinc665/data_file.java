@@ -75,15 +75,21 @@ public class data_file {
     		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             switch(an_integrity_check) {
             	case 4 :
-                	aCheck_value_length = 20;
+                	aCheck_value_length = 16;
                 	aCheck_value_type = check_value_type.MD5;
                 	aCheck_value = new byte[lNumber_of_file][16];
                 	aCheck_value_string = new String[lNumber_of_file];
             	break;
             	case 5 :
-                	aCheck_value_length = 24;
+                	aCheck_value_length = 20;
                 	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[lNumber_of_file][20];
+                	aCheck_value_string = new String[lNumber_of_file];
+            	break;
+            	case 8 :
+                	aCheck_value_length = 8;
+                	aCheck_value_type = check_value_type.CRC64;
+                	aCheck_value = new byte[lNumber_of_file][8];
                 	aCheck_value_string = new String[lNumber_of_file];
             	break;
             	default : ;
@@ -109,6 +115,7 @@ public class data_file {
                 	switch(aCheck_value_type) {
                 		case MD5 :
                 		case SHA_1 :
+                		case CRC64 :
                 			aPointer[i - 1] += (aCheck_value_length / 2) - 1;
                 			break;
                 		default : ;
@@ -126,7 +133,9 @@ public class data_file {
     		                   byte a_padding_char) throws IOException {
          int i;
          int j;
+         int k;
          int lRead_byte;
+         long lCRC64;
          byte[] lRead_bytes = new byte[pFile_size];
          byte[] lBytes;
          FileInputStream lIn_file = new FileInputStream(pFile_to_split);
@@ -181,6 +190,15 @@ public class data_file {
          					System.out.printf("*** Information *** SHA-1 algorihtm exception for data file\n");
          				}
                         break;
+                 	case CRC64 :
+     					lCRC64 = integrity_check.CalculateCRC64(lBytes, lBytes.length);
+      					aCheck_value_string[i - 1] = "";
+      					for(j=0, k=aCheck_value[i - 1].length - 1; j < aCheck_value[i - 1].length;j++, k--) {
+      						aCheck_value[i - 1][j] = (byte) ((lCRC64 >> (k * 8)) & 0xFF);
+      						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
+      					}
+     					System.out.printf("*** Information *** CRC64 of file %s : 0x%s\n", aSub_directory + "/" + aName[i - 1], aCheck_value_string[i - 1]);
+                 		break;
                  	default : ;
                  }
              }
