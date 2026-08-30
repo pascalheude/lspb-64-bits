@@ -37,7 +37,7 @@ public class list_of_files_file {
     public final char aFile_member_sequence_number = 1;	// (ARINC665-2 �3.2.3.2.XX)    (ARINC665-3 �3.3.2.3.2.19)	(ARINC665-4 �3.3.2.3.2.19)
     public int[] aFile_CRC;								// (ARINC665-2 �3.2.3.2.XX)    (ARINC665-3 �3.3.2.3.2.20)	(ARINC665-4 �3.3.2.3.2.20)
     public char aCheck_value_length;					//                            (ARINC665-3 �3.3.2.3.2.27)	(ARINC665-4 �3.3.2.3.2.27)
-    public char aCheck_value_type;						//                            (ARINC665-3 �3.3.2.3.2.28)	(ARINC665-4 �3.3.2.3.2.28)
+    public check_value_type aCheck_value_type;			//                            (ARINC665-3 �3.3.2.3.2.28)	(ARINC665-4 �3.3.2.3.2.28)
     public byte[] aCheck_value;							//                            (ARINC665-3 �3.3.2.3.2.29)	(ARINC665-4 �3.3.2.3.2.29)
     public String aCheck_value_string;					//                            (ARINC665-3 �3.3.2.3.2.29)	(ARINC665-4 �3.3.2.3.2.29)
     public int aCRC16;									// (ARINC665-2 �3.2.3.2.XX)    (ARINC665-3 �3.3.2.3.2.30)	(ARINC665-4 �3.3.2.3.2.30)
@@ -394,6 +394,10 @@ public class list_of_files_file {
         else {
         }
         
+        aCheck_value_type = check_value_type.NOT_USED;
+        aCheck_value_length = 0;
+        aCheck_value = null;
+        aCheck_value_string = null;
         // Add the FILES.LUM File Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
         	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
@@ -402,27 +406,55 @@ public class list_of_files_file {
             // Increase the length (size of FILES.LUM File Check Value Length field)
             aLength++;
         	switch(a_load_integrity_check) {
+	        	case 3 :
+	            	aCheck_value_length = 4;
+	            	aCheck_value_type = check_value_type.CRC32;
+	            	aCheck_value = new byte[4];
+	            	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 3;
+	        	break;
         		case 4 :
-                	aCheck_value_length = 20;
-                	aCheck_value_type = 4;
+                	aCheck_value_length = 16;
+                	aCheck_value_type = check_value_type.MD5;
                 	aCheck_value = new byte[16];
                 	aCheck_value_string = new String();
                     // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
                     aLength += 9;
                     break;
         		case 5 :
-                    aCheck_value_length = 24;
-                	aCheck_value_type = 5;
+                    aCheck_value_length = 20;
+                	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[20];
                 	aCheck_value_string = new String();
                     // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
                     aLength += 11;
                     break;
-                default :
-                	aCheck_value_length = 0;
-                	aCheck_value_type = 0;
-                	aCheck_value = null;
-                	aCheck_value_string = null;
+            	case 6 :
+                	aCheck_value_length = 32;
+                	aCheck_value_type = check_value_type.SHA_256;
+                	aCheck_value = new byte[32];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 17;
+            	break;
+            	case 7 :
+                	aCheck_value_length = 64;
+                	aCheck_value_type = check_value_type.SHA_512;
+                	aCheck_value = new byte[64];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 33;
+            	break;
+            	case 8 :
+                	aCheck_value_length = 8;
+                	aCheck_value_type = check_value_type.CRC64;
+                	aCheck_value = new byte[8];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 5;
+            	break;
+                default : ;
         	}
         }
         else {
@@ -732,6 +764,10 @@ public class list_of_files_file {
         else {
         }
         
+        aCheck_value_type = check_value_type.NOT_USED;
+        aCheck_value_length = 0;
+        aCheck_value = null;
+        aCheck_value_string = null;
         // Add the FILES.LUM File Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
         	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
@@ -740,27 +776,55 @@ public class list_of_files_file {
             // Increase the length (size of FILES.LUM File Check Value Length field)
             aLength++;
         	switch(a_load_integrity_check) {
+	        	case 3 :
+	            	aCheck_value_length = 4;
+	            	aCheck_value_type = check_value_type.CRC32;
+	            	aCheck_value = new byte[4];
+	            	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 3;
+	        	break;
         		case 4 :
-                	aCheck_value_length = 20;
-                	aCheck_value_type = 4;
+                	aCheck_value_length = 16;
+                	aCheck_value_type = check_value_type.MD5;
                 	aCheck_value = new byte[16];
                 	aCheck_value_string = new String();
                     // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
                     aLength += 9;
                     break;
         		case 5 :
-                    aCheck_value_length = 24;
-                	aCheck_value_type = 5;
+                    aCheck_value_length = 20;
+                	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[20];
                 	aCheck_value_string = new String();
                     // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
                     aLength += 11;
                     break;
-                default :
-                	aCheck_value_length = 0;
-                	aCheck_value_type = 0;
-                	aCheck_value = null;
-                	aCheck_value_string = null;
+            	case 6 :
+                	aCheck_value_length = 32;
+                	aCheck_value_type = check_value_type.SHA_256;
+                	aCheck_value = new byte[32];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 17;
+            	break;
+            	case 7 :
+                	aCheck_value_length = 64;
+                	aCheck_value_type = check_value_type.SHA_512;
+                	aCheck_value = new byte[64];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 33;
+            	break;
+            	case 8 :
+                	aCheck_value_length = 8;
+                	aCheck_value_type = check_value_type.CRC64;
+                	aCheck_value = new byte[8];
+                	aCheck_value_string = new String();
+                    // Increase the length (size of FILES.LUM File Check Value Type and FILES.LUM File Check Value fields)
+                    aLength += 5;
+            	break;
+                default : ;
         	}
         }
         else {
@@ -775,7 +839,10 @@ public class list_of_files_file {
      **************************************************************************/
     public void BuildListOfFilesFile(ARINC_norm_version a_norm_version) throws IOException {
         int i;
+        int j;
         int size;
+        int lCRC32;
+        long lCRC64;
         FileOutputStream lOut_file = new FileOutputStream(pName);
 
         // Write File Length field
@@ -824,34 +891,88 @@ public class list_of_files_file {
         	byte[] lBytes = new byte[(int) lFile.length()];
         	lFile.read(lBytes);
             switch(aCheck_value_type) {
-            	case 4 :
+	         	case CRC32 :
+						lCRC32 = integrity_check.CalculateCRC32(lBytes, lBytes.length, 0xFFFFFFFF);
+						aCheck_value_string = "";
+						for(i=0, j=aCheck_value.length - 1; i < aCheck_value.length;i++, j--) {
+							aCheck_value[i] = (byte) ((lCRC32 >> (j * 8)) & 0xFF);
+							aCheck_value_string += String.format("%02X", aCheck_value[i]);
+						}
+						System.out.printf("*** Information *** CRC32 of file %s : 0x%s\n", pName, aCheck_value_string);
+	          		break;
+            	case MD5 :
     				try {
     					aCheck_value_string = "";
     					aCheck_value = integrity_check.CalculateMD5(lBytes);
     		            size += file.WriteChar(lFile, aCheck_value_length);
-                    	size += file.WriteChar(lFile, aCheck_value_type);
+                    	size += file.WriteChar(lFile, aCheck_value_type.getValue());
                     	for(i=1;i <= aCheck_value.length;i++) {
                         	size += file.WriteByte(lFile, aCheck_value[i - 1]);
                         	aCheck_value_string += String.format("%02X", aCheck_value[i - 1]);
                         }
+     					System.out.printf("*** Information *** MD5 of file %s : %s\n", pName, aCheck_value_string);
     				} catch (NoSuchAlgorithmException e) {
     		            size += file.WriteChar(lFile, (char)0);
+                		System.out.printf("*** Information *** MD5 algorihtm exception for %s file\n", pName);
     				}
                     break;
-            	case 5 :
+            	case SHA_1 :
     				try {
     					aCheck_value_string = "";
                     	aCheck_value = integrity_check.CalculateSHA1(lBytes);
                     	size += file.WriteChar(lFile, aCheck_value_length);
-                    	size += file.WriteChar(lFile, aCheck_value_type);
+                    	size += file.WriteChar(lFile, aCheck_value_type.getValue());
                     	for(i=1;i <= aCheck_value.length;i++) {
                         	size += file.WriteByte(lFile, aCheck_value[i - 1]);
                         	aCheck_value_string += String.format("%02X", aCheck_value[i - 1]);
                         }
+     					System.out.printf("*** Information *** SHA-1 of file %s : %s\n", pName, aCheck_value_string);
     				} catch (NoSuchAlgorithmException e) {
     		            size += file.WriteChar(lFile, (char)0);
+                		System.out.printf("*** Information *** SHA-1 algorihtm exception for %s file\n", pName);
     				}
             		break;
+            	case SHA_256 :
+    				try {
+    					aCheck_value_string = "";
+                    	aCheck_value = integrity_check.CalculateSHA256(lBytes);
+                    	size += file.WriteChar(lFile, aCheck_value_length);
+                    	size += file.WriteChar(lFile, aCheck_value_type.getValue());
+                    	for(i=1;i <= aCheck_value.length;i++) {
+                        	size += file.WriteByte(lFile, aCheck_value[i - 1]);
+                        	aCheck_value_string += String.format("%02X", aCheck_value[i - 1]);
+                        }
+     					System.out.printf("*** Information *** SHA-256 of file %s : %s\n", pName, aCheck_value_string);
+    				} catch (NoSuchAlgorithmException e) {
+    		            size += file.WriteChar(lFile, (char)0);
+                		System.out.printf("*** Information *** SHA-256 algorihtm exception for %s file\n", pName);
+    				}
+            		break;
+            	case SHA_512 :
+    				try {
+    					aCheck_value_string = "";
+                    	aCheck_value = integrity_check.CalculateSHA512(lBytes);
+                    	size += file.WriteChar(lFile, aCheck_value_length);
+                    	size += file.WriteChar(lFile, aCheck_value_type.getValue());
+                    	for(i=1;i <= aCheck_value.length;i++) {
+                        	size += file.WriteByte(lFile, aCheck_value[i - 1]);
+                        	aCheck_value_string += String.format("%02X", aCheck_value[i - 1]);
+                        }
+     					System.out.printf("*** Information *** SHA-512 of file %s : %s\n", pName, aCheck_value_string);
+    				} catch (NoSuchAlgorithmException e) {
+    		            size += file.WriteChar(lFile, (char)0);
+                		System.out.printf("*** Information *** SHA-512 algorihtm exception for %s file\n", pName);
+    				}
+            		break;
+	         	case CRC64 :
+						lCRC64 = integrity_check.CalculateCRC64(lBytes, lBytes.length);
+						aCheck_value_string = "";
+						for(i=0, j=aCheck_value.length - 1; i < aCheck_value.length;i++, j--) {
+							aCheck_value[i] = (byte) ((lCRC64 >> (j * 8)) & 0xFF);
+							aCheck_value_string += String.format("%02X", aCheck_value[i]);
+						}
+						System.out.printf("*** Information *** CRC64 of file %s : 0x%s\n", pName, aCheck_value_string);
+	          		break;
                 default :
 		            size += file.WriteChar(lFile, aCheck_value_length);
             }

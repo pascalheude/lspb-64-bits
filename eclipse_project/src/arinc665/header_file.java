@@ -200,8 +200,11 @@ public class header_file {
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
             	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             	switch(aData_file.aCheck_value_type) {
+            		case CRC32 :
             		case MD5 :
             		case SHA_1 :
+            		case SHA_256 :
+            		case SHA_512 :
             		case CRC64 :
             			aLength += 4 + (aData_file.aCheck_value_length / 2);
             			break;
@@ -250,8 +253,11 @@ public class header_file {
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
                 	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
                 	switch(aSupport_file.aCheck_value_type) {
+                		case CRC32 :
                 		case MD5 :
                 		case SHA_1 :
+                		case SHA_256 :
+                		case SHA_512 :
                 		case CRC64 :
                 			aLength += (aSupport_file.aCheck_value_length / 2);
                 			break;

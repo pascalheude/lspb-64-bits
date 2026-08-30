@@ -262,4 +262,22 @@ public class integrity_check {
     	lMD = MessageDigest.getInstance("SHA-1");
     	return(lMD.digest(a_bytes));
     }
+    /**************************************************************************
+     ** Public method : CalculateSHA256                                      **
+     **************************************************************************/
+    public static byte[] CalculateSHA256(byte[] a_bytes) throws NoSuchAlgorithmException {
+    	MessageDigest lMD;
+
+    	lMD = MessageDigest.getInstance("SHA-256");
+    	return(lMD.digest(a_bytes));
+    }
+    /**************************************************************************
+     ** Public method : CalculateSHA512                                      **
+     **************************************************************************/
+    public static byte[] CalculateSHA512(byte[] a_bytes) throws NoSuchAlgorithmException {
+    	MessageDigest lMD;
+
+    	lMD = MessageDigest.getInstance("SHA-512");
+    	return(lMD.digest(a_bytes));
+    }
 }

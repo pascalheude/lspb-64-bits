@@ -74,6 +74,12 @@ public class data_file {
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
     		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
             switch(an_integrity_check) {
+            	case 3 :
+                	aCheck_value_length = 4;
+                	aCheck_value_type = check_value_type.CRC32;
+                	aCheck_value = new byte[lNumber_of_file][4];
+                	aCheck_value_string = new String[lNumber_of_file];
+            	break;
             	case 4 :
                 	aCheck_value_length = 16;
                 	aCheck_value_type = check_value_type.MD5;
@@ -84,6 +90,18 @@ public class data_file {
                 	aCheck_value_length = 20;
                 	aCheck_value_type = check_value_type.SHA_1;
                 	aCheck_value = new byte[lNumber_of_file][20];
+                	aCheck_value_string = new String[lNumber_of_file];
+            	break;
+            	case 6 :
+                	aCheck_value_length = 32;
+                	aCheck_value_type = check_value_type.SHA_256;
+                	aCheck_value = new byte[lNumber_of_file][32];
+                	aCheck_value_string = new String[lNumber_of_file];
+            	break;
+            	case 7 :
+                	aCheck_value_length = 64;
+                	aCheck_value_type = check_value_type.SHA_512;
+                	aCheck_value = new byte[lNumber_of_file][64];
                 	aCheck_value_string = new String[lNumber_of_file];
             	break;
             	case 8 :
@@ -113,8 +131,11 @@ public class data_file {
                 	aPointer[i - 1] += 4 +
                 			           1;
                 	switch(aCheck_value_type) {
+                		case CRC32 :
                 		case MD5 :
                 		case SHA_1 :
+                		case SHA_256 :
+                		case SHA_512 :
                 		case CRC64 :
                 			aPointer[i - 1] += (aCheck_value_length / 2) - 1;
                 			break;
@@ -135,6 +156,7 @@ public class data_file {
          int j;
          int k;
          int lRead_byte;
+         int lCRC32;
          long lCRC64;
          byte[] lRead_bytes = new byte[pFile_size];
          byte[] lBytes;
@@ -164,6 +186,15 @@ public class data_file {
              if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
              	 (a_norm_version == ARINC_norm_version.ARINC665_4)) {
                  switch(aCheck_value_type) {
+                 	case CRC32 :
+	  					lCRC32 = integrity_check.CalculateCRC32(lBytes, lBytes.length, 0xFFFFFFFF);
+	   					aCheck_value_string[i - 1] = "";
+	   					for(j=0, k=aCheck_value[i - 1].length - 1; j < aCheck_value[i - 1].length;j++, k--) {
+	   						aCheck_value[i - 1][j] = (byte) ((lCRC32 >> (k * 8)) & 0xFF);
+	   						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
+	   					}
+	  					System.out.printf("*** Information *** CRC32 of file %s : 0x%s\n", aSub_directory + "/" + aName[i - 1], aCheck_value_string[i - 1]);
+	              		break;
                  	case MD5 :
                         try {
          					aCheck_value[i - 1] = integrity_check.CalculateMD5(lBytes);
@@ -188,6 +219,32 @@ public class data_file {
          				} catch (NoSuchAlgorithmException e) {
          					aCheck_value_length = 0;
          					System.out.printf("*** Information *** SHA-1 algorihtm exception for data file\n");
+         				}
+                        break;
+                 	case SHA_256 :
+                        try {
+         					aCheck_value[i - 1] = integrity_check.CalculateSHA256(lBytes);
+         					aCheck_value_string[i - 1] = "";
+         					for(j=0; j < aCheck_value[i - 1].length;j++) {
+         						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
+         					}
+         					System.out.printf("*** Information *** SHA-256 of file %s : %s\n", aSub_directory + "/" + aName[i - 1], aCheck_value_string[i - 1]);
+         				} catch (NoSuchAlgorithmException e) {
+         					aCheck_value_length = 0;
+         					System.out.printf("*** Information *** SHA-256 algorihtm exception for data file\n");
+         				}
+                        break;
+                 	case SHA_512 :
+                        try {
+         					aCheck_value[i - 1] = integrity_check.CalculateSHA512(lBytes);
+         					aCheck_value_string[i - 1] = "";
+         					for(j=0; j < aCheck_value[i - 1].length;j++) {
+         						aCheck_value_string[i - 1] += String.format("%02X", aCheck_value[i - 1][j]);
+         					}
+         					System.out.printf("*** Information *** SHA-512 of file %s : %s\n", aSub_directory + "/" + aName[i - 1], aCheck_value_string[i - 1]);
+         				} catch (NoSuchAlgorithmException e) {
+         					aCheck_value_length = 0;
+         					System.out.printf("*** Information *** SHA-512 algorihtm exception for data file\n");
          				}
                         break;
                  	case CRC64 :

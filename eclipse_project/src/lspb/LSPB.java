@@ -120,7 +120,7 @@ public class LSPB extends JFrame {
 	public static ARINC665 aARINC665;
 	private static ARINC_norm_version aARINC_norm_version;
 	private static final int kSIS_system_zone_size = 0x3B0;
-	private static final String kTitle = "LSPB v4.0 beta";
+	private static final String kTitle = "LSPB v4.1 beta";
 	private final String kARINC_logo = "/images/arinc_logo.jpg";
 	/**************************************************************************
 	 ** Private method : DisplayUsage                                        **
@@ -146,7 +146,7 @@ public class LSPB extends JFrame {
 			lFile.read(a_UDD);
 			lFile.close();
 		} catch (FileNotFoundException e) {
-			// Impossible case because the existance of the user defined data file has been tested during the analysis of the XML configuration file
+			// Impossible case because the existence of the user defined data file has been tested during the analysis of the XML configuration file
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -350,12 +350,24 @@ public class LSPB extends JFrame {
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
 				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
+					case CRC32 :
+						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : CRC32 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubNode.add(lSubSubNode);
+						break;
 					case MD5 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 						lSubNode.add(lSubSubNode);
 						break;
 					case SHA_1 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubNode.add(lSubSubNode);
+						break;
+					case SHA_256 :
+						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubNode.add(lSubSubNode);
+						break;
+					case SHA_512 :
+						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 						lSubNode.add(lSubSubNode);
 						break;
 					case CRC64 :
@@ -445,6 +457,12 @@ public class LSPB extends JFrame {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
+				case CRC32 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
 				case MD5 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
 					lSubSubNode.add(lSubSubSubNode);
@@ -455,6 +473,18 @@ public class LSPB extends JFrame {
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
+				case SHA_256 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
+				case SHA_512 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
 				case CRC64 :
@@ -489,6 +519,12 @@ public class LSPB extends JFrame {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_type) {
+				case CRC32 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
 				case MD5 :
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
 					lSubSubNode.add(lSubSubSubNode);
@@ -499,6 +535,18 @@ public class LSPB extends JFrame {
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
 					lSubSubNode.add(lSubSubSubNode);
 					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
+				case SHA_256 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+					lSubSubNode.add(lSubSubSubNode);
+					break;
+				case SHA_512 :
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
+					lSubSubNode.add(lSubSubSubNode);
+					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
 					lSubSubNode.add(lSubSubSubNode);
 					break;
 				case CRC64 :
@@ -640,14 +688,38 @@ public class LSPB extends JFrame {
 			lNode.add(lSubNode);
 			if (aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length != 0) {
 				switch(aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_type) {
-					case 4 :
+					case CRC32 :
+						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = CRC32");
+						lSubNode.add(lSubSubNode);
+						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
+						lSubNode.add(lSubSubNode);
+						break;
+					case MD5 :
 						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = MD5");
 						lSubNode.add(lSubSubNode);
 						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
 						lSubNode.add(lSubSubNode);
 						break;
-					case 5 :
+					case SHA_1 :
 						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = SHA-1");
+						lSubNode.add(lSubSubNode);
+						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
+						lSubNode.add(lSubSubNode);
+						break;
+					case SHA_256 :
+						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = SHA-256");
+						lSubNode.add(lSubSubNode);
+						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
+						lSubNode.add(lSubSubNode);
+						break;
+					case SHA_512 :
+						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = SHA-512");
+						lSubNode.add(lSubSubNode);
+						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
+						lSubNode.add(lSubSubNode);
+						break;
+					case CRC64 :
+						lSubSubNode = new DefaultMutableTreeNode("FILES.LUM file check value type = CRC64");
 						lSubNode.add(lSubSubNode);
 						lSubSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value = %s", aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_string));
 						lSubNode.add(lSubSubNode);

@@ -72,14 +72,23 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
 	 ** Private method : DisplayUsage                                        **
 	 **************************************************************************/
 	private static char GetIntegrityCheckValue(String a_string) {
-		if (a_string.equals("CRC64")) {
-			return(8);
+		if (a_string.equals("CRC32")) {
+			return(3);
 		}
 		else if (a_string.equals("MD5")) {
             return(4);
         }
         else if (a_string.equals("SHA-1")) {
             return(5);
+        }
+        else if (a_string.equals("SHA-256")) {
+            return(6);
+        }
+        else if (a_string.equals("SHA-512")) {
+            return(7);
+        }
+        else if (a_string.equals("CRC64")) {
+            return(8);
         }
         else {
         	return(0);
@@ -516,23 +525,31 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 }
             	break;
             case INPUT_FILE :
-            	if (aInput_file_integrity_check == 4) {
-                    if (aNorm_version == 2) {
-                    	System.out.printf("*** Information *** integrity check is useless with ARINC665 version 2\n");
-                    }
-                    else {
-                		System.out.printf("Input file integrity check : MD5\n");
-                    }
-            	}
-            	else if (aInput_file_integrity_check == 5) {
-                    if (aNorm_version == 2) {
-                    	System.out.printf("*** Information *** integrity check is useless with ARINC665 version 2\n");
-                    }
-                    else {
-                		System.out.printf("Input file integrity check : SHA-1\n");
-                    }
-            	}
+            	if ((aNorm_version == 1) || (aNorm_version == 2)) {
+                	System.out.printf("*** Warning *** integrity check is useless with ARINC665 version 1 or 2\n");
+                }
             	else {
+            		switch(aInput_file_integrity_check) {
+            		    case 3 :
+                    		System.out.printf("Input file integrity check : CRC32\n");
+            		    	break;
+            		    case 4 :
+                    		System.out.printf("Input file integrity check : MD5\n");
+            		    	break;
+            		    case 5 :
+                    		System.out.printf("Input file integrity check : SHA-1\n");
+            		    	break;
+            		    case 6 :
+                    		System.out.printf("Input file integrity check : SHA-256\n");
+            		    	break;
+            		    case 7 :
+                    		System.out.printf("Input file integrity check : SHA-512\n");
+            		    	break;
+            		    case 8 :
+                    		System.out.printf("Input file integrity check : CRC64\n");
+            		    	break;
+            		    default : ;
+            		}
             	}
                 aInput_file = lString;
                 System.out.printf("Input file name : %s\n", aInput_file);
@@ -573,23 +590,31 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 }
                 break;
             case SUPPORT_FILE_LIST :
-            	if (aSupport_file_integrity_check == 4) {
-                    if (aNorm_version == 2) {
-                    	System.out.printf("*** Warning *** integrity check is useless with ARINC665 version 2\n");
-                    }
-                    else {
-                		System.out.printf("Support file integrity check : MD5\n");
-                    }
-            	}
-            	else if (aSupport_file_integrity_check == 5) {
-                    if (aNorm_version == 2) {
-                    	System.out.printf("*** Warning *** integrity check is useless with ARINC665 version 2\n");
-                    }
-                    else {
-                		System.out.printf("Support file integrity check : SHA-1\n");
-                    }
-            	}
+            	if ((aNorm_version == 1) || (aNorm_version == 2)) {
+                	System.out.printf("*** Warning *** integrity check is useless with ARINC665 version 1 or 2\n");
+                }
             	else {
+            		switch(aSupport_file_integrity_check) {
+            		    case 3 :
+                    		System.out.printf("Support file integrity check : CRC32\n");
+            		    	break;
+            		    case 4 :
+                    		System.out.printf("Support file integrity check : MD5\n");
+            		    	break;
+            		    case 5 :
+                    		System.out.printf("Support file integrity check : SHA-1\n");
+            		    	break;
+            		    case 6 :
+                    		System.out.printf("Support file integrity check : SHA-256\n");
+            		    	break;
+            		    case 7 :
+                    		System.out.printf("Support file integrity check : SHA-512\n");
+            		    	break;
+            		    case 8 :
+                    		System.out.printf("Support file integrity check : CRC64\n");
+            		    	break;
+            		    default : ;
+            		}
             	}
             	if (aSupport_file == null) {
             		System.out.printf("Number of support files : 0\n");
