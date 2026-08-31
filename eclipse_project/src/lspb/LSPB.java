@@ -106,6 +106,7 @@ public class LSPB extends JFrame {
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_2;
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_3;
 	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_4;
+	private JCheckBoxMenuItem pJCheckBoxMenuItemARINC665_5;
 	private JSplitPane pSplitPane;
 	private JTabbedPane pJTabbedPane;
 	private JTree pJTreeConfiguration;
@@ -120,7 +121,7 @@ public class LSPB extends JFrame {
 	public static ARINC665 aARINC665;
 	private static ARINC_norm_version aARINC_norm_version;
 	private static final int kSIS_system_zone_size = 0x3B0;
-	private static final String kTitle = "LSPB v4.1 beta";
+	private static final String kTitle = "LSPB v4.2 beta";
 	private final String kARINC_logo = "/images/arinc_logo.jpg";
 	/**************************************************************************
 	 ** Private method : DisplayUsage                                        **
@@ -348,7 +349,8 @@ public class LSPB extends JFrame {
 			lSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aData_file.aCRC16[i]));
 			lSubNode.add(lSubSubNode);
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
 					case CRC32 :
 						lSubSubNode = new DefaultMutableTreeNode(String.format("Integrity check : CRC32 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
@@ -406,7 +408,8 @@ public class LSPB extends JFrame {
 		lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to user defined data = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_UDD * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_UDD), true);
 		lNode.add(lSubNode);
 		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to load type description = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_LTD * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.aPointer_to_LTD), true);
 			lNode.add(lSubNode);
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to number of THWID with positions = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_part.aHeader_file.kPointer_to_THWID_with_position_list * 2, LSPB.aARINC665.aSoftware_part.aHeader_file.kPointer_to_THWID_with_position_list), true);
@@ -421,7 +424,8 @@ public class LSPB extends JFrame {
 		lSubNode = new DefaultMutableTreeNode(String.format("Load P/N = %s", LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_PN), true);
 		lNode.add(lSubNode);
 		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Load type description length = %d bytes (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription.length(), LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription.length()), true);
 			lNode.add(lSubNode);
 			lSubNode = new DefaultMutableTreeNode(String.format("Load type description = %s", LSPB.aARINC665.aSoftware_part.aHeader_file.aLoad_type.aDescription), true);
@@ -453,46 +457,47 @@ public class LSPB extends JFrame {
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aData_file.aCRC16[i]));
 			lSubSubNode.add(lSubSubSubNode);
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_type) {
-				case CRC32 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case MD5 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_1 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_256 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_512 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case CRC64 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
+					case CRC32 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case MD5 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_1 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_256 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_512 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case CRC64 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aData_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
 					default : ;
 				}
 			}
@@ -515,46 +520,47 @@ public class LSPB extends JFrame {
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_part.aSupport_file.aCRC16[i]));
 			lSubSubNode.add(lSubSubSubNode);
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-				(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 				lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_length));
 				lSubSubNode.add(lSubSubSubNode);
 				switch(LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_type) {
-				case CRC32 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case MD5 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_1 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_256 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case SHA_512 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
-				case CRC64 :
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
-					lSubSubNode.add(lSubSubSubNode);
-					lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
-					lSubSubNode.add(lSubSubSubNode);
-					break;
+					case CRC32 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC32"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC32 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case MD5 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = MD5"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("MD5 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_1 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-1"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-1 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_256 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-256"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-256 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case SHA_512 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = SHA-512"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("SHA-512 = %s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
+					case CRC64 :
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("Check value type = CRC64"));
+						lSubSubNode.add(lSubSubSubNode);
+						lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC64 = 0x%s", LSPB.aARINC665.aSoftware_part.aSupport_file.aCheck_value_string[i]));
+						lSubSubNode.add(lSubSubSubNode);
+						break;
 					default : ;
 				}
 			}
@@ -645,7 +651,8 @@ public class LSPB extends JFrame {
 		lNode.add(lSubNode);
 		lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to user defined data = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_UDD * 2, LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_UDD), true);
 		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("Absolute Pointer to FILES.LUM check value length = %d bytes (0x%04X)", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_FCV * 2, LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aPointer_to_FCV), true);
 		}
 		else {
@@ -675,7 +682,8 @@ public class LSPB extends JFrame {
 			lSubSubSubNode = new DefaultMutableTreeNode(String.format("CRC16 = 0x%04X", LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aFile_CRC[i]));
 			lSubSubNode.add(lSubSubSubNode);
 			if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-		    	(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+		    	(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+				(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 				lSubSubSubNode = new DefaultMutableTreeNode("File check value length = 0 word");
 				lSubSubNode.add(lSubSubSubNode);
 			}
@@ -683,7 +691,8 @@ public class LSPB extends JFrame {
 			}
 		}
 		if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-			(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+			(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 			lSubNode = new DefaultMutableTreeNode(String.format("FILES.LUM file check value length = %d words (0x%04X)", (int)LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length, (int)LSPB.aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length), true);
 			lNode.add(lSubNode);
 			if (aARINC665.aSoftware_transport_media.aList_of_files_file.aCheck_value_length != 0) {
@@ -806,47 +815,47 @@ public class LSPB extends JFrame {
 					}
 					if (lNextNode != null) {
 						switch(lTreeModel.getIndexOfChild(lNextNode.getParent(), lNextNode)) {
-						case 0 :
-							while(lNode.getParent() != lNextNode) {
-								lNode = (DefaultMutableTreeNode) lNode.getParent();
-							}
-							int i = lTreeModel.getIndexOfChild(lNextNode, lNode);
-							if (i < aARINC665.aSoftware_part.aData_file.aName.length) {
-								pJTextAreaConfiguration.setVisible(false);
-								try {
-									pJTextAreaLoad.setText(file.BuildHexaDump(aARINC665.aSoftware_part.aData_file.aSub_directory + "/" + aARINC665.aSoftware_part.aData_file.aName[i], aARINC665.aSoftware_part.aData_file.aLength_in_bytes[i]));
-								} catch (IOException e) {
-									pJTextAreaLoad.setText("File not found : " + aARINC665.aSoftware_part.aData_file.aSub_directory + "/" + aARINC665.aSoftware_part.aData_file.aName[i]);
+							case 0 :
+								while(lNode.getParent() != lNextNode) {
+									lNode = (DefaultMutableTreeNode) lNode.getParent();
 								}
+								int i = lTreeModel.getIndexOfChild(lNextNode, lNode);
+								if (i < aARINC665.aSoftware_part.aData_file.aName.length) {
+									pJTextAreaConfiguration.setVisible(false);
+									try {
+										pJTextAreaLoad.setText(file.BuildHexaDump(aARINC665.aSoftware_part.aData_file.aSub_directory + "/" + aARINC665.aSoftware_part.aData_file.aName[i], aARINC665.aSoftware_part.aData_file.aLength_in_bytes[i]));
+									} catch (IOException e) {
+										pJTextAreaLoad.setText("File not found : " + aARINC665.aSoftware_part.aData_file.aSub_directory + "/" + aARINC665.aSoftware_part.aData_file.aName[i]);
+									}
+									pJTextAreaLoad.setEditable(false);
+									pJTextAreaLoad.setVisible(true);
+									pRightJScrollPane.setViewportView(pJTextAreaLoad);
+								}
+								else {
+								}
+								break;
+							case 1 :
+								pJTextAreaConfiguration.setVisible(false);
+								pJTextAreaLoad.setText(aARINC665.aSoftware_part.aHeader_file.aHexa_dump);
 								pJTextAreaLoad.setEditable(false);
 								pJTextAreaLoad.setVisible(true);
 								pRightJScrollPane.setViewportView(pJTextAreaLoad);
-							}
-							else {
-							}
-							break;
-						case 1 :
-							pJTextAreaConfiguration.setVisible(false);
-							pJTextAreaLoad.setText(aARINC665.aSoftware_part.aHeader_file.aHexa_dump);
-							pJTextAreaLoad.setEditable(false);
-							pJTextAreaLoad.setVisible(true);
-							pRightJScrollPane.setViewportView(pJTextAreaLoad);
-							break;
-						case 2 :
-							pJTextAreaConfiguration.setVisible(false);
-							pJTextAreaLoad.setText(aARINC665.aSoftware_transport_media.aList_of_loads_file.aHexa_dump);
-							pJTextAreaLoad.setEditable(false);
-							pJTextAreaLoad.setVisible(true);
-							pRightJScrollPane.setViewportView(pJTextAreaLoad);
-							break;
-						case 3 :
-							pJTextAreaConfiguration.setVisible(false);
-							pJTextAreaLoad.setText(aARINC665.aSoftware_transport_media.aList_of_files_file.aHexa_dump);
-							pJTextAreaLoad.setEditable(false);
-							pJTextAreaLoad.setVisible(true);
-							pRightJScrollPane.setViewportView(pJTextAreaLoad);
-							break;
-						default : ;
+								break;
+							case 2 :
+								pJTextAreaConfiguration.setVisible(false);
+								pJTextAreaLoad.setText(aARINC665.aSoftware_transport_media.aList_of_loads_file.aHexa_dump);
+								pJTextAreaLoad.setEditable(false);
+								pJTextAreaLoad.setVisible(true);
+								pRightJScrollPane.setViewportView(pJTextAreaLoad);
+								break;
+							case 3 :
+								pJTextAreaConfiguration.setVisible(false);
+								pJTextAreaLoad.setText(aARINC665.aSoftware_transport_media.aList_of_files_file.aHexa_dump);
+								pJTextAreaLoad.setEditable(false);
+								pJTextAreaLoad.setVisible(true);
+								pRightJScrollPane.setViewportView(pJTextAreaLoad);
+								break;
+							default : ;
 						}
 					}
 					else {
@@ -903,6 +912,7 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_2.setSelected(false);
 							pJCheckBoxMenuItemARINC665_3.setSelected(false);
 							pJCheckBoxMenuItemARINC665_4.setSelected(false);
+							pJCheckBoxMenuItemARINC665_5.setSelected(false);
 							break;
 						default :
 						case 2 :
@@ -911,6 +921,7 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_2.setSelected(true);
 							pJCheckBoxMenuItemARINC665_3.setSelected(false);
 							pJCheckBoxMenuItemARINC665_4.setSelected(false);
+							pJCheckBoxMenuItemARINC665_5.setSelected(false);
 							break;
 						case 3 :
 							aARINC_norm_version = ARINC_norm_version.ARINC665_3;
@@ -918,6 +929,7 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_2.setSelected(false);
 							pJCheckBoxMenuItemARINC665_3.setSelected(true);
 							pJCheckBoxMenuItemARINC665_4.setSelected(false);
+							pJCheckBoxMenuItemARINC665_5.setSelected(false);
 							break;
 						case 4 :
 							aARINC_norm_version = ARINC_norm_version.ARINC665_4;
@@ -925,6 +937,15 @@ public class LSPB extends JFrame {
 							pJCheckBoxMenuItemARINC665_2.setSelected(false);
 							pJCheckBoxMenuItemARINC665_3.setSelected(false);
 							pJCheckBoxMenuItemARINC665_4.setSelected(true);
+							pJCheckBoxMenuItemARINC665_5.setSelected(false);
+							break;
+						case 5 :
+							aARINC_norm_version = ARINC_norm_version.ARINC665_5;
+							pJCheckBoxMenuItemARINC665_1.setSelected(false);
+							pJCheckBoxMenuItemARINC665_2.setSelected(false);
+							pJCheckBoxMenuItemARINC665_3.setSelected(false);
+							pJCheckBoxMenuItemARINC665_4.setSelected(false);
+							pJCheckBoxMenuItemARINC665_5.setSelected(true);
 							break;
 						}
 						pJTreeConfiguration = new JTree();
@@ -948,7 +969,8 @@ public class LSPB extends JFrame {
 						lSubNode = new DefaultMutableTreeNode("Part Number : " + pXML_configuration_file.aLoad_PN, true);
 						lNode.add(lSubNode);
 						if ((aARINC_norm_version == ARINC_norm_version.ARINC665_3) ||
-							(aARINC_norm_version == ARINC_norm_version.ARINC665_4)) {
+							(aARINC_norm_version == ARINC_norm_version.ARINC665_4) ||
+							(aARINC_norm_version == ARINC_norm_version.ARINC665_5)) {
 							if (pXML_configuration_file.aLoad_type_description != null) {
 								lSubNode = new DefaultMutableTreeNode("Load type description : " + pXML_configuration_file.aLoad_type_description, true);
 								lNode.add(lSubNode);
@@ -958,14 +980,30 @@ public class LSPB extends JFrame {
 							else {
 							}
 							switch(pXML_configuration_file.aLoad_integrity_check) {
+								case 3 :
+									lSubNode = new DefaultMutableTreeNode("Integrity check : CRC32\n", true);
+									lNode.add(lSubNode);
+									break;
 								case 4 :
 									lSubNode = new DefaultMutableTreeNode("Integrity check : MD5\n", true);
 									lNode.add(lSubNode);
-								break;
+									break;
 								case 5 :
 									lSubNode = new DefaultMutableTreeNode("Integrity check : SHA-1\n", true);
 									lNode.add(lSubNode);
-								break;
+									break;
+								case 6 :
+									lSubNode = new DefaultMutableTreeNode("Integrity check : SHA-256\n", true);
+									lNode.add(lSubNode);
+									break;
+								case 7 :
+									lSubNode = new DefaultMutableTreeNode("Integrity check : SHA-512\n", true);
+									lNode.add(lSubNode);
+									break;
+								case 8 :
+									lSubNode = new DefaultMutableTreeNode("Integrity check : CRC64\n", true);
+									lNode.add(lSubNode);
+									break;
 								default : ;
 							}
 						}
@@ -981,14 +1019,30 @@ public class LSPB extends JFrame {
 						lNode.add(lSubNode);
 						DefaultMutableTreeNode lSubSubNode;
 						switch(pXML_configuration_file.aInput_file_integrity_check) {
+							case 3 :
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC32\n", true);
+								lSubNode.add(lSubSubNode);
+								break;
 							case 4 :
 								lSubSubNode = new DefaultMutableTreeNode("Integrity check : MD5\n", true);
 								lSubNode.add(lSubSubNode);
-							break;
+								break;
 							case 5 :
 								lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-1\n", true);
 								lSubNode.add(lSubSubNode);
-							break;
+								break;
+							case 6 :
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-256\n", true);
+								lSubNode.add(lSubSubNode);
+								break;
+							case 7 :
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-512\n", true);
+								lSubNode.add(lSubSubNode);
+								break;
+							case 8 :
+								lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC64\n", true);
+								lSubNode.add(lSubSubNode);
+								break;
 							default : ;
 						}
 						lSubSubNode = new DefaultMutableTreeNode("Padding character : " + String.format("%d (ASCII code)", pXML_configuration_file.aPadding), true);
@@ -1000,19 +1054,32 @@ public class LSPB extends JFrame {
 						if (pXML_configuration_file.aSupport_file != null) {
 							lSubNode = new DefaultMutableTreeNode(String.format("Support files : %d", pXML_configuration_file.aSupport_file.length), true);
 							lNode.add(lSubNode);
-							if (pXML_configuration_file.aSupport_file_integrity_check == 4) {
-								lSubSubNode = new DefaultMutableTreeNode("Integrity check : MD5\n", true);
-								lSubNode.add(lSubSubNode);
-							}
-							else if (pXML_configuration_file.aSupport_file_integrity_check == 5) {
-								lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-1\n", true);
-								lSubNode.add(lSubSubNode);
-							}
-							else if (pXML_configuration_file.aSupport_file_integrity_check == 8) {
-								lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC64\n", true);
-								lSubNode.add(lSubSubNode);
-							}
-							else {
+							switch(pXML_configuration_file.aSupport_file_integrity_check) {
+								case 3 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC32\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								case 4 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : MD5\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								case 5 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-1\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								case 6 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-256\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								case 7 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : SHA-512\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								case 8 :
+									lSubSubNode = new DefaultMutableTreeNode("Integrity check : CRC64\n", true);
+									lSubNode.add(lSubSubNode);
+									break;
+								default : ;
 							}
 							for(int i=0;i < pXML_configuration_file.aSupport_file.length;i++) {
 								lSubSubNode = new DefaultMutableTreeNode(String.format("File #%d : %s", i+1, pXML_configuration_file.aSupport_file[i]), true);
@@ -1094,6 +1161,7 @@ public class LSPB extends JFrame {
 				pJCheckBoxMenuItemARINC665_2.setSelected(false);
 				pJCheckBoxMenuItemARINC665_3.setSelected(false);
 				pJCheckBoxMenuItemARINC665_4.setSelected(false);
+				pJCheckBoxMenuItemARINC665_5.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_1;
 			}
 		};
@@ -1102,6 +1170,7 @@ public class LSPB extends JFrame {
 				pJCheckBoxMenuItemARINC665_1.setSelected(false);
 				pJCheckBoxMenuItemARINC665_3.setSelected(false);
 				pJCheckBoxMenuItemARINC665_4.setSelected(false);
+				pJCheckBoxMenuItemARINC665_5.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_2;
 			}
 		};
@@ -1110,6 +1179,7 @@ public class LSPB extends JFrame {
 				pJCheckBoxMenuItemARINC665_1.setSelected(false);
 				pJCheckBoxMenuItemARINC665_2.setSelected(false);
 				pJCheckBoxMenuItemARINC665_4.setSelected(false);
+				pJCheckBoxMenuItemARINC665_5.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_3;
 			}
 		};
@@ -1118,7 +1188,17 @@ public class LSPB extends JFrame {
 				pJCheckBoxMenuItemARINC665_1.setSelected(false);
 				pJCheckBoxMenuItemARINC665_2.setSelected(false);
 				pJCheckBoxMenuItemARINC665_3.setSelected(false);
+				pJCheckBoxMenuItemARINC665_5.setSelected(false);
 				aARINC_norm_version = ARINC_norm_version.ARINC665_4;
+			}
+		};
+		ActionListener actionARINC665_5 = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				pJCheckBoxMenuItemARINC665_1.setSelected(false);
+				pJCheckBoxMenuItemARINC665_2.setSelected(false);
+				pJCheckBoxMenuItemARINC665_3.setSelected(false);
+				pJCheckBoxMenuItemARINC665_4.setSelected(false);
+				aARINC_norm_version = ARINC_norm_version.ARINC665_5;
 			}
 		};
 		ActionListener actionGenerate = new ActionListener() {
@@ -1249,6 +1329,14 @@ public class LSPB extends JFrame {
 		pJCheckBoxMenuItemARINC665_4.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, 0));
 		pJCheckBoxMenuItemARINC665_4.addActionListener(actionARINC665_4);
 		lJMenuNorm.add(pJCheckBoxMenuItemARINC665_4);
+
+		pJCheckBoxMenuItemARINC665_5 = new JCheckBoxMenuItem("ARINC665-5");
+		pJCheckBoxMenuItemARINC665_5.setEnabled(true);
+		pJCheckBoxMenuItemARINC665_5.setMnemonic('5');
+		pJCheckBoxMenuItemARINC665_5.setSelected(false);
+		pJCheckBoxMenuItemARINC665_5.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, 0));
+		pJCheckBoxMenuItemARINC665_5.addActionListener(actionARINC665_5);
+		lJMenuNorm.add(pJCheckBoxMenuItemARINC665_5);
 
 		pJMenuItemGenerate = new JMenuItem("Generate");
 		pJMenuItemGenerate.setMaximumSize(new Dimension(65, 50));

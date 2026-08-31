@@ -117,8 +117,8 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             catch(Exception e) {
             	aNorm_version = 0;
             }
-            if ((aNorm_version < 1) || (aNorm_version > 4)) {
-            	throw new SAXException("*** Error *** ARINC665 version shall be 1 or 2 or 3 or 4.");
+            if ((aNorm_version < 1) || (aNorm_version > 5)) {
+            	throw new SAXException("*** Error *** ARINC665 version shall be in [1-5].");
             }
             else {
             }

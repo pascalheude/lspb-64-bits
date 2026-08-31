@@ -147,7 +147,8 @@ public class list_of_files_file {
         // Increase the length (size of File CRC field)
         aLength++;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -162,7 +163,8 @@ public class list_of_files_file {
                                    1 +
                                    1);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	aFile_pointer[0]++;
         }
         else {
@@ -198,7 +200,8 @@ public class list_of_files_file {
         // Increase the length (size of File CRC field)
         aLength++;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -213,7 +216,8 @@ public class list_of_files_file {
                                    1 +
                                    1);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	aFile_pointer[1]++;
         }
         else {
@@ -249,7 +253,8 @@ public class list_of_files_file {
         // Increase the length (size of File CRC field)
         aLength++;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -264,7 +269,8 @@ public class list_of_files_file {
                                    1 +
                                    1);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	aFile_pointer[2]++;
         }
         else {
@@ -301,7 +307,8 @@ public class list_of_files_file {
             // Increase the length (size of File CRC field)
             aLength++;
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+            	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+        		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             	// Increase the length (size of File Check Value Length field)
             	aLength++;
             }
@@ -321,7 +328,8 @@ public class list_of_files_file {
                                                1 +
                                                1);
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	aFile_pointer[i + 3]++;
                 }
                 else {
@@ -361,7 +369,8 @@ public class list_of_files_file {
                 // Increase the length (size of File CRC field)
                 aLength++;
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	// Increase the length (size of File Check Value Length field)
                 	aLength++;
                 }
@@ -381,7 +390,8 @@ public class list_of_files_file {
                                                    1 +
                                                    1);
                     if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                    	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                    	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+                		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                     	aFile_pointer[i + file_index]++;
                     }
                     else {
@@ -400,7 +410,8 @@ public class list_of_files_file {
         aCheck_value_string = null;
         // Add the FILES.LUM File Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             // Set the Pointer to FILES.LUM File Check Value field
             aPointer_to_FCV = aLength;
             // Increase the length (size of FILES.LUM File Check Value Length field)
@@ -568,7 +579,8 @@ public class list_of_files_file {
         // Increase the length (size of File CRC field)
         aLength++;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -583,7 +595,8 @@ public class list_of_files_file {
                                    1 +
                                    1);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	aFile_pointer[0]++;
         }
         else {
@@ -619,7 +632,8 @@ public class list_of_files_file {
         // Increase the length (size of File CRC field)
         aLength++;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Increase the length (size of File Check Value Length field)
         	aLength++;
         }
@@ -634,7 +648,8 @@ public class list_of_files_file {
                                    1 +
                                    1);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	aFile_pointer[1]++;
         }
         else {
@@ -671,7 +686,8 @@ public class list_of_files_file {
             // Increase the length (size of File CRC field)
             aLength++;
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+            	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+        		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             	// Increase the length (size of File Check Value Length field)
             	aLength++;
             }
@@ -691,7 +707,8 @@ public class list_of_files_file {
                                                1 +
                                                1);
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	aFile_pointer[i + 2]++;
                 }
                 else {
@@ -731,7 +748,8 @@ public class list_of_files_file {
                 // Increase the length (size of File CRC field)
                 aLength++;
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	// Increase the length (size of File Check Value Length field)
                 	aLength++;
                 }
@@ -751,7 +769,8 @@ public class list_of_files_file {
                                                    1 +
                                                    1);
                     if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                    	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                    	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+                		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                     	aFile_pointer[i + file_index]++;
                     }
                     else {
@@ -770,7 +789,8 @@ public class list_of_files_file {
         aCheck_value_string = null;
         // Add the FILES.LUM File Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             // Set the Pointer to FILES.LUM File Check Value field
             aPointer_to_FCV = aLength;
             // Increase the length (size of FILES.LUM File Check Value Length field)
@@ -856,7 +876,8 @@ public class list_of_files_file {
         size += file.WriteInt(lOut_file, aPointer_to_File_List);
         size += file.WriteInt(lOut_file, aPointer_to_UDD);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	size += file.WriteInt(lOut_file, aPointer_to_FCV);
         }
         else {
@@ -877,7 +898,8 @@ public class list_of_files_file {
             size += file.WriteChar(lOut_file, aFile_member_sequence_number);
             size += file.WriteChar(lOut_file, (char) aFile_CRC[i]);
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+            	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+        		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             	size += file.WriteChar(lOut_file, (char)0);
             }
             else {
@@ -886,7 +908,8 @@ public class list_of_files_file {
         lOut_file.close();
         // Write File Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	RandomAccessFile lFile = new RandomAccessFile(pName, "rw");
         	byte[] lBytes = new byte[(int) lFile.length()];
         	lFile.read(lBytes);

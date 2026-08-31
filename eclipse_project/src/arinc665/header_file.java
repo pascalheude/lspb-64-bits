@@ -115,7 +115,8 @@ public class header_file {
         // Increase the length (size of Pointer to User Define Data field)
         aLength += 2;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-    		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+    		(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Initialize the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9) (ARINC665-4 �2.2.3.1.9)
         	aPointer_to_LTD = 0;
             // Increase the length (size of Pointer to Load Type Description field)
@@ -143,7 +144,8 @@ public class header_file {
         aLength += (1 + a_load_PN.length()) / 2;
         // Set the Load Type Description fields if necessary
         if (((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	 (a_norm_version == ARINC_norm_version.ARINC665_4)) &&
+        	 (a_norm_version == ARINC_norm_version.ARINC665_4) ||
+     		 (a_norm_version == ARINC_norm_version.ARINC665_5)) &&
         	(a_load_type_description != null)) {
         	// Set the Pointer to Load Type Description field (ARINC665-3 �2.2.3.1.9) (ARINC665-4 �2.2.3.1.9)
         	aPointer_to_LTD = aLength;
@@ -198,7 +200,8 @@ public class header_file {
                        2 +
                        1;
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+            	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+        		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             	switch(aData_file.aCheck_value_type) {
             		case CRC32 :
             		case MD5 :
@@ -251,7 +254,8 @@ public class header_file {
                            2 +
                            1;
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	switch(aSupport_file.aCheck_value_type) {
                 		case CRC32 :
                 		case MD5 :
@@ -292,7 +296,8 @@ public class header_file {
         aPointer_to_LCV = aLength;
         // Add the Load Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             // Increase the length (size of Load Check Value Length field)
             aLength++;
         	switch(a_load_integrity_check) {
@@ -352,7 +357,8 @@ public class header_file {
         size += file.WriteInt(lOut_file, aPointer_to_SF_list);
         size += file.WriteInt(lOut_file, aPointer_to_UDD);
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	size += file.WriteInt(lOut_file, aPointer_to_LTD);
         	size += file.WriteInt(lOut_file, kPointer_to_THWID_with_position_list);
         	size += file.WriteInt(lOut_file, aPointer_to_LCV);
@@ -364,7 +370,8 @@ public class header_file {
         size += file.WriteString(lOut_file, aLoad_PN);
         // Write Load Type Description if requested
         if (((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	 (a_norm_version == ARINC_norm_version.ARINC665_4)) &&
+        	 (a_norm_version == ARINC_norm_version.ARINC665_4) ||
+     		 (a_norm_version == ARINC_norm_version.ARINC665_5)) &&
             (aPointer_to_LTD != 0)) {
         	size += file.WriteChar(lOut_file, (char) aLoad_type.aDescription.length());
         	size += file.WriteString(lOut_file, aLoad_type.aDescription);
@@ -394,7 +401,8 @@ public class header_file {
             //  2. for the last data file, a padding character is added when calling constructor of data file class
             size += file.WriteChar(lOut_file, (char) aData_file.aCRC16[i - 1]);
             if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-            	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+            	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+        		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             	size += file.WriteInt(lOut_file, 0);
             	size += file.WriteInt(lOut_file, aData_file.aLength_in_bytes[i - 1]);
             	size += file.WriteChar(lOut_file, aData_file.aCheck_value_length);
@@ -424,7 +432,8 @@ public class header_file {
                 size += file.WriteInt(lOut_file, aSupport_file.aLength[i - 1]);
                 size += file.WriteChar(lOut_file, (char) aSupport_file.aCRC16[i - 1]);
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	size += file.WriteChar(lOut_file, aSupport_file.aCheck_value_length);
                 	if (aSupport_file.aCheck_value_type != check_value_type.NOT_USED) {
                 		size += file.WriteChar(lOut_file, aSupport_file.aCheck_value_type.getValue());
@@ -451,7 +460,8 @@ public class header_file {
         }
         // Write Load Check Value fields if requested
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-        	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+        	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
         	// Write the Load Check Value length field
             size += file.WriteChar(lOut_file, aCheck_value_length);
             // TODO Impl�menter le load check value

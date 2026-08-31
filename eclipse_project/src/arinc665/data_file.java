@@ -72,7 +72,8 @@ public class data_file {
     	aCheck_value = null;
     	aCheck_value_string = null;
         if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-    		(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+    		(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+    		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
             switch(an_integrity_check) {
             	case 3 :
                 	aCheck_value_length = 4;
@@ -127,7 +128,8 @@ public class data_file {
             else {
                 aPointer[i - 1] = (char) (1 + 1 + ((1 + aName_length) / 2) + 1 + ((1 + aPN.length()) / 2) + 2 + 1);
                 if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-                	(a_norm_version == ARINC_norm_version.ARINC665_4)) {
+                	(a_norm_version == ARINC_norm_version.ARINC665_4) ||
+            		(a_norm_version == ARINC_norm_version.ARINC665_5)) {
                 	aPointer[i - 1] += 4 +
                 			           1;
                 	switch(aCheck_value_type) {
@@ -184,7 +186,8 @@ public class data_file {
              aCRC16[i - 1] = integrity_check.CalculateCRC16(lBytes, lBytes.length);
              System.out.printf("*** Information *** CRC16 of file %s : 0x%04X\n", aSub_directory + "/" + aName[i - 1], aCRC16[i - 1]);
              if ((a_norm_version == ARINC_norm_version.ARINC665_3) ||
-             	 (a_norm_version == ARINC_norm_version.ARINC665_4)) {
+             	 (a_norm_version == ARINC_norm_version.ARINC665_4) ||
+             	 (a_norm_version == ARINC_norm_version.ARINC665_5)) {
                  switch(aCheck_value_type) {
                  	case CRC32 :
 	  					lCRC32 = integrity_check.CalculateCRC32(lBytes, lBytes.length, 0xFFFFFFFF);

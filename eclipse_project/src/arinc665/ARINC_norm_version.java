@@ -7,15 +7,16 @@ public enum ARINC_norm_version {
 	ARINC665_1(0),
 	ARINC665_2(1),
 	ARINC665_3(2),
-	ARINC665_4(3);
+	ARINC665_4(3),
+	ARINC665_5(4);
 
     /**************************************************************************
      ** Attributes                                                           **
      **************************************************************************/
-    //                                                  ARINC665-1 ARINC665-2 ARINC665-3 ARINC665-4 (see ARINC665 �1.4.1)
-    private final char kLoad_file_format_version[]  = {  '\u8002',  '\u8003',  '\u8004',  '\u8004'  };
-    private final char kBatch_file_format_version[] = {  '\u0000',  '\u9003',  '\u9004',  '\u9004'  };
-    private final char kMedia_file_format_version[] = {  '\u8002',  '\uA003',  '\uA004',  '\uA004'  };
+    //                                                  ARINC665-1 ARINC665-2 ARINC665-3 ARINC665-4 ARINC665-5 (see ARINC665 �1.4.1)
+    private final char kLoad_file_format_version[]  = {  '\u8002',  '\u8003',  '\u8004',  '\u8004',  '\u8004'  };
+    private final char kBatch_file_format_version[] = {  '\u0000',  '\u9003',  '\u9004',  '\u9004',  '\u9004'  };
+    private final char kMedia_file_format_version[] = {  '\u8002',  '\uA003',  '\uA004',  '\uA004',  '\uA004'  };
 	private int pValue;
 
     /**************************************************************************
@@ -33,6 +34,7 @@ public enum ARINC_norm_version {
 			case 2 : return(ARINC665_2);
 			case 3 : return(ARINC665_3);
 			case 4 : return(ARINC665_4);
+			case 5 : return(ARINC665_5);
     	}
     	return(ARINC665_2);
     }
