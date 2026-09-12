@@ -106,7 +106,7 @@ public class support_file {
             Path source = Paths.get(a_support_file_list[i - 1]);
             Path destination = Paths.get(a_sub_directory + "/" + aName[i - 1]);
             try {
-            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
+	            Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
             }
             catch(IOException e) {
 				throw new ARINC665Exception("*** Error *** Impossible to copy support file");

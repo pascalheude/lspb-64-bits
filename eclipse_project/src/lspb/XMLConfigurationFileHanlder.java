@@ -69,6 +69,14 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
 	public boolean aF_HW_SW_compatibility_index_present;
 	public char aHW_SW_compatibility_index;
 	/**************************************************************************
+	 ** Private method : IsFileNameValid                                     **
+	 **************************************************************************/
+	private static boolean IsFileNameValid(String a_string) {
+		// Valid characters shall be a 7-bits US ASCII with the exception of space * \ / " < > ? ~ :
+		String regex = "^[\\p{ASCII}&&[^ *\\\\/\"<>?~:]]+$";
+		return a_string.matches(regex);
+	}
+	/**************************************************************************
 	 ** Private method : DisplayUsage                                        **
 	 **************************************************************************/
 	private static char GetIntegrityCheckValue(String a_string) {
@@ -434,6 +442,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                            int a_start_index, 
                            int a_length) throws SAXException {
         String lString = new String(a_TAB_char, a_start_index, a_length);
+        String lFilename;
         File lFile;
 
         switch(pXML_tag)
@@ -489,7 +498,7 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 aMMM = lString;
                 System.out.printf("Company name : %s\n", aMMM);
                 break;
-            case LOAD : // TBT
+            case LOAD : // TODO : to test
             	if (aLoad_integrity_check == 4) {
                     if (aNorm_version == 2) {
                     	System.out.printf("*** Information *** integrity check is useless with ARINC665 version 2\n");
@@ -510,6 +519,11 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
             	}
                 break;
             case PART_NUMBER :
+            	if (lString.length() > 12) {
+            		throw new SAXException("*** Error *** Too long part number");
+            	}
+            	else {
+            	}
                 aLoad_PN = lString;
                 aMedia_PN = lString;
                 System.out.printf("Load name : %s\n", aLoad_PN);
@@ -625,6 +639,15 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 break;
             case SUPPORT_FILE :
                 if (pCurrent_number_of_support_file < aSupport_file.length) {
+                	lFilename = new File(lString).getName();
+                	if (lFilename.length() > 255) {
+                		throw new SAXException("*** Error *** Too many characters in support file name");
+                	}
+                	else if (IsFileNameValid(lFilename) == false) {
+                		throw new SAXException("*** Error *** Invalid character in support file name");
+                	}
+                	else {
+                	}
                 	aSupport_file[pCurrent_number_of_support_file] = new String(lString);
                     System.out.printf("Support file #%d : %s\n", pCurrent_number_of_support_file + 1, aSupport_file[pCurrent_number_of_support_file]);
                     lFile = new File(aSupport_file[pCurrent_number_of_support_file]);
@@ -640,6 +663,15 @@ class XMLConfigurationFileHanlder extends DefaultHandler {
                 }
                 break;
             case USER_DATA_FILE :
+            	lFilename = new File(lString).getName();
+            	if (lFilename.length() > 255) {
+            		throw new SAXException("*** Error *** Too many characters in user data file name");
+            	}
+            	else if (IsFileNameValid(lFilename) == false) {
+            		throw new SAXException("*** Error *** Invalid character in user data file name");
+            	}
+            	else {
+            	}
             	aUser_data_file = lString;
             	System.out.printf("User data file : %s\n", aUser_data_file);
                 lFile = new File(aUser_data_file);
